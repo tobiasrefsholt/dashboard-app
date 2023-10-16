@@ -1,3 +1,51 @@
+body{
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: min-content repeat(3, 1fr) min-content;
+    grid-template-areas: 
+        "clock    clock    clock    clock"
+        "calendar calendar calendar weather"
+        "calendar calendar calendar alarm"
+        "calendar calendar calendar timer"
+        "buttons  buttons  buttons  buttons"
+    ;
+    gap: 1rem;
+    height: 100vh;
+    width: 100vw;
+}
+
 .calendar {
-    background: repeating-linear-gradient( 0deg, #82869d, #000000 2px, #000000 2px, #000000 calc( 100%/24 ));
+    grid-area: calendar;
+    /* background: repeating-linear-gradient( 0deg, #82869d, #000000 2px, #000000 2px, #000000 calc( 100%/24 )); */
+}
+
+.clock {
+    grid-area: clock;
+}
+
+.weather {
+    grid-area: weather;
+}
+
+.alarm {
+    grid-area: alarm;
+}
+
+.timer {
+    grid-area: timer;
+}
+
+.buttons {
+    grid-area: buttons;
+}
+
+.grid-item{
+    background-color: #181A1B;
 }
