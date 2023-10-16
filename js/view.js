@@ -1,9 +1,5 @@
 "use strict";
 
-window.addEventListener("load", function () {
-    updateView();
-});
-
  function updateView() {
     let popupHTML = getPopupHTML();
     document.getElementById("app").innerHTML = /*html*/`
@@ -21,8 +17,9 @@ window.addEventListener("load", function () {
     `;
 }
 
-function getPopupHTML(currentPopUp) {
+function getPopupHTML() {
 
+    const currentPopUp = model.app.currentPopUp;
     let popupHTML;
 
     if (currentPopUp == "taskDetails") {

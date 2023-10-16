@@ -1,3 +1,4 @@
-function init() {
-    model.inputs.clockPopUp.timeZone = Date().getTimezoneOffset();
-}
+window.addEventListener("load", function () {
+    model.inputs.popUps.clock.timeZone = new Date().getTimezoneOffset();
+    updateView();
+});

@@ -1,6 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body{
-    background-color: black;
-    color: white;
+    background-color: #121212;
+    color: grey;
     margin: 0;
     padding: 0;
 }
@@ -8,7 +12,7 @@ body{
 .main-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: min-content repeat(3, 1fr) min-content;
+    grid-template-rows: min-content 1fr repeat(3, min-content);
     grid-template-areas: 
         "clock    clock    clock    clock"
         "calendar calendar calendar weather"
@@ -16,9 +20,10 @@ body{
         "calendar calendar calendar timer"
         "buttons  buttons  buttons  buttons"
     ;
-    gap: 1rem;
+    gap: 2rem;
     height: 100vh;
     width: 100vw;
+    padding: 2rem;
 }
 
 .calendar {
@@ -28,6 +33,10 @@ body{
 
 .clock {
     grid-area: clock;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .weather {
@@ -46,6 +55,13 @@ body{
     grid-area: buttons;
 }
 
+.widget-header {
+    margin-top: 0;
+    text-align: center;
+}
+
 .grid-item{
     background-color: #181A1B;
+    border-radius: 1rem;
+    padding: 1rem;
 }
