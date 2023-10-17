@@ -40,7 +40,7 @@ function getPopupHTML() {
     if (currentPopUp == "clockOptions") {
         popupHTML = getPopupClockOptionsHTML();
     }
-    if (model.app.currentPopUp == null) {
+    if (currentPopUp == null) {
         return '';
     }
 

@@ -41,7 +41,18 @@ body{
     background:
         repeating-linear-gradient( 180deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/24 )),
         repeating-linear-gradient( 90deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/7 ));
+    background-size: calc(100% - 3.5rem);
+    background-position: right;
     background-attachment:local;
+}
+
+.calendar .calendar-header-row {
+    display: grid;
+    grid-template-columns: 3.5rem repeat(7, 1fr);
+}
+
+.calendar .calendar-header-row h2 {
+    text-align: center;
 }
 
 .calendar .calender-grid .calendar-event {
@@ -51,10 +62,15 @@ body{
     border-radius: .5rem;
 }
 
+.calendar .calender-grid .calendar-header {
+    grid-row: 1 / span 4;
+    text-align: center;
+}
+
 .calendar .calender-grid .calendar-time {
     grid-column: 1;
     grid-row: auto / span 4;
-    padding-right: 1rem;
+    min-width: 3.5rem;
 }
 
 .clock {
