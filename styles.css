@@ -28,7 +28,33 @@ body{
 
 .calendar {
     grid-area: calendar;
-    /* background: repeating-linear-gradient( 0deg, #82869d, #000000 2px, #000000 2px, #000000 calc( 100%/24 )); */
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar .calender-grid {
+    display: grid;
+    grid-template-columns: min-content repeat(7, 1fr);
+    grid-template-rows: repeat(96, minmax(.5rem, 1fr));
+    overflow-y: auto;
+    flex-grow: 1;
+    background:
+        repeating-linear-gradient( 180deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/24 )),
+        repeating-linear-gradient( 90deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/7 ));
+    background-attachment:local;
+}
+
+.calendar .calender-grid .calendar-event {
+    background-color: #027CB7;
+    color: #ffffff;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.calendar .calender-grid .calendar-time {
+    grid-column: 1;
+    grid-row: auto / span 4;
+    padding-right: 1rem;
 }
 
 .clock {
@@ -64,4 +90,17 @@ body{
     background-color: #181A1B;
     border-radius: 1rem;
     padding: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff20;
+  }
+
+::-webkit-scrollbar-thumb {
+    background: #888;
 }
