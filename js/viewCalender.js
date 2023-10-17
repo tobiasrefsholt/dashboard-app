@@ -1,6 +1,6 @@
 function getCalendarHTML() {
     return /* html */`
-        <h2 class="widget-header">Uke ${model.inputs.mainPage.calendar.showWeekNr || '53'}</h2>
+        <h2 class="widget-header">Uke ${model.inputs.mainPage.calendar.showWeekNr}</h2>
         ${getCalendarHeaderHTML()}
         <div class="calender-grid">
             ${getCalendarTimeHTML()}
