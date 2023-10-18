@@ -6,9 +6,13 @@ const model = {
     },
     inputs: {
         mainPage: {
-            stopwatch: {
-                fullTimer: null,
-                currentTime: null,
+            timer: {
+                fullTimer: {
+                    hours: null,
+                    minutes: null,
+                    seconds: null
+                },
+                countDownDate: null,
             },
             calendar: {
                 showWeekNr: null,

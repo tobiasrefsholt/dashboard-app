@@ -4,7 +4,7 @@
 
 body{
     background-color: #121212;
-    color: grey;
+    color: #ffffff90;
     margin: 0;
     padding: 0;
 }
@@ -39,8 +39,8 @@ body{
     overflow-y: auto;
     flex-grow: 1;
     background:
-        repeating-linear-gradient( 180deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/24 )),
-        repeating-linear-gradient( 90deg, #82869d60, #00000000 2px, #00000000 2px, #00000000 calc( 100%/7 ));
+        repeating-linear-gradient( 180deg, #ffffff20, transparent 2px, transparent 2px, transparent calc( 100%/24 )),
+        repeating-linear-gradient( 90deg, #ffffff20, transparent 2px, transparent 2px, transparent calc( 100%/7 ));
     background-size: calc(100% - 3.5rem);
     background-position: right;
     background-attachment:local;
@@ -51,7 +51,8 @@ body{
     grid-template-columns: 3.5rem repeat(7, 1fr);
 }
 
-.calendar .calendar-header-row h2 {
+.calendar .calendar-header-row .calendar-header {
+    grid-row: 1 / span 4;
     text-align: center;
 }
 
@@ -60,11 +61,6 @@ body{
     color: #ffffff;
     padding: .5rem;
     border-radius: .5rem;
-}
-
-.calendar .calender-grid .calendar-header {
-    grid-row: 1 / span 4;
-    text-align: center;
 }
 
 .calendar .calender-grid .calendar-time {
@@ -79,6 +75,55 @@ body{
     gap: 2rem;
     align-items: center;
     justify-content: center;
+}
+
+.timer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.timer svg {
+    fill: #027CB7;
+    cursor: pointer;
+    width: 3rem;
+    height: auto;
+   
+}
+
+/* .timer .play {
+    width: 3rem;
+    height: 3rem;
+}
+
+.timer .pause {
+    width: calc(3rem - 7px);
+    height: calc(3rem - 7px);
+} */
+
+.timer .buttons {
+    display: flex;
+    align-items: center;
+    /* flex-direction: column; */
+    gap: .5rem;
+}
+
+.timer .timerNumbers {
+    font-size: 3rem;
+}
+
+.timer .timerNumbers input {
+    color: #ffffff90;
+    font-size: inherit;
+    text-align: center;
+    width: 4rem;
+    background-color: transparent;
+    border: none;
+}
+
+.timer .timerNumbers input::-webkit-outer-spin-button,
+.timer .timerNumbers input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .weather {
