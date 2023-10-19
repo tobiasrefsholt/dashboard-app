@@ -25,7 +25,7 @@ let timerInterval = null;
 function toggleTimer() {
     if (timerInterval == null) {
         setCountdownDate();
-        timerInterval = setInterval(timer, 1000);
+        timerInterval = setInterval(timer, 100);
     } else {
         clearInterval(timerInterval);
         timerInterval = null;
