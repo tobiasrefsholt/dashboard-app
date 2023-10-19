@@ -20,7 +20,7 @@ function getCalendarHeaderHTML() {
             <h2 class="calendar-header">Mandag</h2>
             <h2 class="calendar-header">Tirsdag</h2>
             <h2 class="calendar-header">Onsdag</h2>
-            <h2 class="calendar-header">Tordag</h2>
+            <h2 class="calendar-header">Torsdag</h2>
             <h2 class="calendar-header">Fredag</h2>
             <h2 class="calendar-header">Lørdag</h2>
             <h2 class="calendar-header">Søndag</h2>
