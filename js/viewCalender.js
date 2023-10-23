@@ -4,11 +4,7 @@ function getCalendarHTML() {
         ${getCalendarHeaderHTML()}
         <div class="calender-grid">
             ${getCalendarTimeHTML()}
-            <div class="calendar-event" style="grid-column: 2; grid-row: 33 / 37;">Test</div>
-            <div class="calendar-event" style="grid-column: 3; grid-row: 41 / 47;">Test</div>
-            <div class="calendar-event" style="grid-column: 4; grid-row: 21 / 27;">Test</div>
-            <div class="calendar-event" style="grid-column: 5; grid-row: 73 / 77;">Test</div>
-            <div class="calendar-event" style="grid-column: 7; grid-row: 33 / 37;">Test</div>
+            ${getEventHtml()}
         </div>
     `;
 }
@@ -43,8 +39,45 @@ function getCalendarTimeHTML() {
     return $html;
 }
 
-function getPopupTaskDetailsHTML() {
+function getEventHtml() {
+    let html = '';
+    const eventsForWeek = getEventsForWeek();
+    for (eventIndex in eventsForWeek) {
+        const calendarEvent = model.calendar[eventIndex];
+        const {gridColumn, gridRowStart, gridRowEnd} = getEventPosition(calendarEvent);
+        html += /* html */`
+            <div 
+                onclick="showEventDetails(${calendarEvent.taskId})"
+                class="calendar-event"
+                style="grid-column: ${gridColumn}; grid-row: ${gridRowStart} / ${gridRowEnd};">
+                ${calendarEvent.title}
+            </div>
+        `;
+    }
+    return html;
+}
 
+function getEventPosition(calendarEvent) {
+    const startTime = new Date(calendarEvent.startTime);
+    const dayIndex = startTime.getDay();
+    const minutesFromMidnight = startTime.getHours() * 60 + startTime.getMinutes();
+    let gridColumn;
+    let gridRowStart = 1 + Math.floor(minutesFromMidnight / 15);
+    let gridRowEnd = 1 + Math.ceil((minutesFromMidnight + calendarEvent.durationInMinutes) / 15);
+
+    if (dayIndex == 0) {
+        gridColumn = 8;
+    } else {
+        gridColumn = dayIndex + 1;
+    }
+
+    return {gridColumn, gridRowStart, gridRowEnd};
+}
+
+function getPopupTaskDetailsHTML() {
+    return /* html */`
+        <h1>Hello World! <br> lets do the harlem shake :D</h1>
+    `;
 }
 
 function getPopupEditTaskHTML() {

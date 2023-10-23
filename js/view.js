@@ -45,7 +45,7 @@ function getPopupHTML() {
     }
 
     return /* html */ `
+        <div class="popup-background" onclick="clearPopup()"></div>
         <div class="popup">${popupHTML}</div>
     `;
 }
-

@@ -83,7 +83,29 @@ function clearTimer() {
     updateView();
 }
 
-// function countSeconds(){
-//     app.innerHTML = seconds;
-//     seconds--;
-// }
+function clearPopup(){
+    model.app.currentPopUp = null;
+    updateView();
+}
+
+function getEventsForWeek() {
+    const returnEvents = [];
+
+    for (eventIndex in model.calendar) {
+        const eventWeek = new Date(model.calendar[eventIndex].startTime).getWeek();
+        const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
+        if (eventWeek == displayWeek) {
+            returnEvents.push(model.calendar[eventIndex]);
+        }
+    }
+
+    console.log(returnEvents);
+    
+    return returnEvents;
+}
+
+function showEventDetails(taskId){
+    model.inputs.popUps.editTask.taskId = taskId;
+    model.app.currentPopUp = "taskDetails";
+    updateView();
+}
