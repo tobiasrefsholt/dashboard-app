@@ -75,8 +75,19 @@ function getEventPosition(calendarEvent) {
 }
 
 function getPopupTaskDetailsHTML() {
+    const currentTask = getTaskByID(model.inputs.popUps.taskDetails.taskId);
     return /* html */`
-        <h1>Hello World! <br> lets do the harlem shake :D</h1>
+        <!-- <h1>Hello World! <br> lets do the harlem shake :D</h1> -->
+        <h1>${currentTask.title}</h1>
+        <div class="popup-grid">
+            <h2>Tid: </h2>
+            <p>${new Date(currentTask.startTime).toLocaleString("nb-NO", {dateStyle: 'long',timeStyle: 'short'})}</p>
+            <h2>Varighet:</h2>
+            <p>${currentTask.durationInMinutes} minutter</p>
+            <h2 style="margin-top:0">Beskrivelse: </h2>
+            <p style="margin-top: 0.2rem;">${currentTask.desc}</p>
+        </div>
+        <button>Rediger</button>
     `;
 }
 

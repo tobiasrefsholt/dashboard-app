@@ -105,7 +105,15 @@ function getEventsForWeek() {
 }
 
 function showEventDetails(taskId){
-    model.inputs.popUps.editTask.taskId = taskId;
+    model.inputs.popUps.taskDetails.taskId = taskId;
     model.app.currentPopUp = "taskDetails";
     updateView();
+}
+
+function getTaskByID(taskId) {
+    for (task of model.calendar) {
+        if (taskId == task.taskId) {
+            return task;
+        }
+    }
 }
