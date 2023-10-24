@@ -15,6 +15,13 @@
         </div>
         ${popupHTML}
     `;
+    flatpickr(".dateField", {
+        defaultDate: 'today'
+    });
+    flatpickr(".timeField", {
+        enableTime: true,
+        noCalendar: true,
+    });
 }
 
 function getPopupHTML() {

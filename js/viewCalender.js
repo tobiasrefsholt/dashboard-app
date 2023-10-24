@@ -96,5 +96,55 @@ function getPopupEditTaskHTML() {
 }
 
 function getPopupAddTaskHTML() {
-
+    const addTask = model.inputs.popUps.addTask;
+    const path = 'model.inputs.popUps.addTask';
+    return /* html */ `
+        <h1>Legg til oppgave</h1>
+        <div class="popup-grid">
+            <h2>Tittel:</h2>
+            <input type="text" oninput="${path}.title = this.value" value="${addTask.title || ''}">
+            <h2>Beskrivelse:</h2>
+            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${addTask.desc || ''}"></textarea>
+            <h2>Dato:</h2>
+            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${addTask.date || ''}">
+            <h2>Fra:</h2>
+            <input type="text" class="timeField" oninput="${path}.startTime = this.value" value="${addTask.startTime || ''}">
+            <h2>Til:</h2>
+            <input type="text" class="timeField" oninput="${path}.endTime = this.value" value="${addTask.endTime || ''}">
+            <h2>Gjenta:</h2>
+            <div class="radio-buttons">
+                <span>
+                    <input type="radio" name="repeat" id="repeat-never" checked="true">
+                    <label for="repeat-never">Nei!</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-daily"
+                        onchange="${path}.repeat.daily = this.checked"
+                    >
+                    <label for="repeat-daily">Daglig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-weekly"
+                        onchange="${path}.repeat.weekly = this.checked"
+                    >
+                    <label for="repeat-weekly">Ukentlig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-monthly"
+                        onchange="${path}.repeat.monthly = this.checked"
+                    >
+                    <label for="repeat-monthly">Månedlig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-yearly"
+                        onchange="${path}.repeat.yearly = this.checked"
+                    >
+                    <label for="repeat-yearly">Årlig</label>
+                </span>
+            </div>
+            <h2>Interval</h2>
+            <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
+        </div>
+        <button onclick="">Legg til</button>
+    `;
 }
