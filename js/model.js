@@ -41,6 +41,7 @@ const model = {
                     weekly: false,
                     daily: false,
                 },
+                errorMessage: null,
             },
             addTask: {
                 taskId: 1,
@@ -56,6 +57,7 @@ const model = {
                     weekly: false,
                     daily: false,
                 },
+                errorMessage: null,
             },
             editAlarm: {
                 alarmId: null,

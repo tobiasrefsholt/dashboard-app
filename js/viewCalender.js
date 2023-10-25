@@ -107,15 +107,15 @@ function getPopupEditTaskHTML() {
     return /* html */ `
         <h1>Rediger oppgave</h1>
         <div class="popup-grid">
-            <h2>Tittel:</h2>
+            <h2>*Tittel:</h2>
             <input type="text" oninput="${path}.title = this.value" value="${editTask.title || ''}">
             <h2>Beskrivelse:</h2>
             <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${editTask.desc || ''}"></textarea>
-            <h2>Dato:</h2>
+            <h2>*Dato:</h2>
             <input type="text" class="dateField" oninput="${path}.date = this.value" value="${editTask.date || new Date().toISOString().substring(0, 10)}">
-            <h2>Fra:</h2>
+            <h2>*Fra:</h2>
             <input type="text" class="timeField" oninput="${path}.timeStart = this.value" value="${editTask.timeStart || ''}">
-            <h2>Til:</h2>
+            <h2>*Til:</h2>
             <input type="text" class="timeField" oninput="${path}.timeEnd = this.value" value="${editTask.timeEnd || ''}">
             <h2>Gjenta:</h2>
             <div class="radio-buttons">
@@ -151,6 +151,7 @@ function getPopupEditTaskHTML() {
             <h2>Interval</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
+        <p>${addTask.errorMessage || ''}</p>
         <button onclick="editTask()">Endre</button>
     `;
 }
@@ -161,15 +162,15 @@ function getPopupAddTaskHTML() {
     return /* html */ `
         <h1>Legg til oppgave</h1>
         <div class="popup-grid">
-            <h2>Tittel:</h2>
+            <h2>*Tittel:</h2>
             <input type="text" oninput="${path}.title = this.value" value="${addTask.title || ''}">
             <h2>Beskrivelse:</h2>
             <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${addTask.desc || ''}"></textarea>
-            <h2>Dato:</h2>
+            <h2>*Dato:</h2>
             <input type="text" class="dateField" oninput="${path}.date = this.value" value="${addTask.date || new Date().toISOString().substring(0, 10)}">
-            <h2>Fra:</h2>
+            <h2>*Fra:</h2>
             <input type="text" class="timeField" oninput="${path}.timeStart = this.value" value="${addTask.timeStart || ''}">
-            <h2>Til:</h2>
+            <h2>*Til:</h2>
             <input type="text" class="timeField" oninput="${path}.timeEnd = this.value" value="${addTask.timeEnd || ''}">
             <h2>Gjenta:</h2>
             <div class="radio-buttons">
@@ -205,6 +206,16 @@ function getPopupAddTaskHTML() {
             <h2>Interval</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
+        <p>${addTask.errorMessage || ''}</p>
         <button onclick="addTask()">Legg til</button>
     `;
+}
+
+function initDatePicker() {
+    flatpickr(".dateField", {});
+    flatpickr(".timeField", {
+        enableTime: true,
+        noCalendar: true,
+        time_24hr: true,
+    });
 }

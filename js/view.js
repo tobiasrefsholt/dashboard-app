@@ -15,12 +15,7 @@
         </div>
         ${popupHTML}
     `;
-    flatpickr(".dateField", {});
-    flatpickr(".timeField", {
-        enableTime: true,
-        noCalendar: true,
-        time_24hr: true,
-    });
+    initDatePicker();
 }
 
 function getPopupHTML() {

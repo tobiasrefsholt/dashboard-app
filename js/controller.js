@@ -12,7 +12,6 @@ function getEventsForWeek() {
     for (let calendarEvent of model.calendar) {
         const eventWeek = new Date(calendarEvent.date).getWeek();
         const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
-        console.log(eventWeek);
         if (eventWeek == displayWeek) {
             returnEvents.push(calendarEvent);
         }
@@ -135,7 +134,13 @@ function addTask() {
     // TODO: Valider input-felter
     // TODO: Feilmeldingsfunksjon
     if (fields.date === null) fields.date = new Date().toISOString().substring(0, 10);
-    if(!validateFields(fields)) return;
+    if (!validateFields(fields)) {
+        fields.errorMessage = "Fyll ut alle påkrevde felter.";
+        updateView();
+        return;
+    } else {
+        fields.errorMessage = null;
+    }
     model.calendar.push({
         taskId: generate,
         title: fields.title,
@@ -157,29 +162,51 @@ function addTask() {
 }
 
 function validateFields(fields) {
+    if (!fields.title) return false;
+    if (!fields.date) return false;
+    if (!fields.timeStart) return false;
+    if (!fields.timeEnd) return false;
     return true;   
 }
 
 function resetCalenderEventFields(fields) {
-    fields = {
-        taskId: null,
-        title: null,
-        desc: null,
-        date: null,
-        timeStart: null,
-        timeEnd: null,
-        repeat: {
-            interval: null,
-            yearly: false,
-            monthly: false,
-            weekly: false,
-            daily: false,
-        }
-    }
+    fields.taskId = null;
+    fields.title = null;
+    fields.desc = null;
+    fields.date= null;
+    fields.timeStart = null;
+    fields.timeEnd = null;
+    fields.repeat.interval = null;
+    fields.repeat.yearly = false;
+    fields.repeat.monthly = false;
+    fields.repeat.weekly = false;
+    fields.repeat.daily = false;
 }
 
 function editTask(){
-    
+    let fields = model.inputs.popUps.addTask;
+    // TODO: Regn ut durationInMinutes
+    // TODO: Valider input-felter
+    // TODO: Feilmeldingsfunksjon
+    if(!validateFields(fields)) return;
+    model.calendar.push({
+        taskId: fields.taskId,
+        title: fields.title,
+        desc: fields.desc,
+        date: fields.date,
+        timeStart: fields.timeStart,
+        timeEnd: fields.timeEnd,
+        repeat: {
+            interval: fields.repeat.interval,
+            yearly: fields.repeat.yearly,
+            monthly: fields.repeat.monthly,
+            weekly: fields.repeat.weekly,
+            daily: fields.repeat.daily,
+        }
+    });
+    resetCalenderEventFields(fields);
+    model.app.currentPopUp = null;
+    updateView();
 }
 
 function deleteTask(taskId) {
