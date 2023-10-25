@@ -6,6 +6,34 @@ window.addEventListener("load", function () {
     updateView();
 });
 
+function getEventsForWeek() {
+    const returnEvents = [];
+
+    for (eventIndex in model.calendar) {
+        const eventWeek = new Date(model.calendar[eventIndex].startTime).getWeek();
+        const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
+        if (eventWeek == displayWeek) {
+            returnEvents.push(model.calendar[eventIndex]);
+        }
+    }
+    
+    return returnEvents;
+}
+
+function showEventDetails(taskId){
+    model.inputs.popUps.taskDetails.taskId = taskId;
+    model.app.currentPopUp = "taskDetails";
+    updateView();
+}
+
+function getTaskByID(taskId) {
+    for (task of model.calendar) {
+        if (taskId == task.taskId) {
+            return task;
+        }
+    }
+}
+
 // Returns the ISO week of the date.
 Date.prototype.getWeek = function() {
     var date = new Date(this.getTime());
@@ -88,32 +116,21 @@ function clearPopup(){
     updateView();
 }
 
-function getEventsForWeek() {
-    const returnEvents = [];
-
-    for (eventIndex in model.calendar) {
-        const eventWeek = new Date(model.calendar[eventIndex].startTime).getWeek();
-        const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
-        if (eventWeek == displayWeek) {
-            returnEvents.push(model.calendar[eventIndex]);
-        }
-    }
-
-    console.log(returnEvents);
-    
-    return returnEvents;
-}
-
-function showEventDetails(taskId){
-    model.inputs.popUps.taskDetails.taskId = taskId;
-    model.app.currentPopUp = "taskDetails";
+function showPopupEditTask(taskId) {
+    model.app.currentPopUp = "editTask";
+    model.inputs.popUps.editTask.taskId = taskId;
     updateView();
 }
 
-function getTaskByID(taskId) {
-    for (task of model.calendar) {
-        if (taskId == task.taskId) {
-            return task;
-        }
-    }
+function showPopupAddTask() {
+    model.app.currentPopUp = "addTask";
+    updateView();
+}
+
+function addTask() {
+    
+}
+
+function deleteTask(taskId) {
+    
 }

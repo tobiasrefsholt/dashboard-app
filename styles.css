@@ -235,6 +235,7 @@ button {
     border-radius: .5rem;
     padding: .5rem 1rem;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .radio-buttons span {

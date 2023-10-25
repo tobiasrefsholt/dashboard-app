@@ -10,7 +10,7 @@
             <div class="grid-item alarm">${getAlarmHTML() || ''}</div>
             <div class="grid-item timer">${getTimerHTML() || ''}</div>
             <div class="buttons">
-                <button>Legg til oppgave</button>
+                <button onclick="showPopupAddTask()">Legg til oppgave</button>
             </div>
         </div>
         ${popupHTML}

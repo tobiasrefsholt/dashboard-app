@@ -87,12 +87,65 @@ function getPopupTaskDetailsHTML() {
             <h2 style="margin-top:0">Beskrivelse: </h2>
             <p style="margin-top: 0.2rem;">${currentTask.desc}</p>
         </div>
-        <button>Rediger</button>
+        <div>
+            <button onclick="showPopupEditTask(${currentTask.taskId})">Rediger</button>
+            <button onclick="deleteTask(${currentTask.taskId})">Slett</button>
+        </div>
     `;
 }
 
 function getPopupEditTaskHTML() {
-
+    const editTask = model.inputs.popUps.editTask;
+    const path = 'model.inputs.popUps.editTask';
+    return /* html */ `
+        <h1>Rediger oppgave</h1>
+        <div class="popup-grid">
+            <h2>Tittel:</h2>
+            <input type="text" oninput="${path}.title = this.value" value="${editTask.title || ''}">
+            <h2>Beskrivelse:</h2>
+            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${editTask.desc || ''}"></textarea>
+            <h2>Dato:</h2>
+            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${editTask.date || ''}">
+            <h2>Fra:</h2>
+            <input type="text" class="timeField" oninput="${path}.startTime = this.value" value="${editTask.startTime || ''}">
+            <h2>Til:</h2>
+            <input type="text" class="timeField" oninput="${path}.endTime = this.value" value="${editTask.endTime || ''}">
+            <h2>Gjenta:</h2>
+            <div class="radio-buttons">
+                <span>
+                    <input type="radio" name="repeat" id="repeat-never" checked="true">
+                    <label for="repeat-never">Nei!</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-daily"
+                        onchange="${path}.repeat.daily = this.checked"
+                    >
+                    <label for="repeat-daily">Daglig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-weekly"
+                        onchange="${path}.repeat.weekly = this.checked"
+                    >
+                    <label for="repeat-weekly">Ukentlig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-monthly"
+                        onchange="${path}.repeat.monthly = this.checked"
+                    >
+                    <label for="repeat-monthly">Månedlig</label>
+                </span>
+                <span>
+                    <input type="radio" name="repeat" id="repeat-yearly"
+                        onchange="${path}.repeat.yearly = this.checked"
+                    >
+                    <label for="repeat-yearly">Årlig</label>
+                </span>
+            </div>
+            <h2>Interval</h2>
+            <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
+        </div>
+        <button onclick="">Legg til</button>
+    `;
 }
 
 function getPopupAddTaskHTML() {
