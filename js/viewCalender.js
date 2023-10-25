@@ -42,8 +42,7 @@ function getCalendarTimeHTML() {
 function getEventHtml() {
     let html = '';
     const eventsForWeek = getEventsForWeek();
-    for (eventIndex in eventsForWeek) {
-        const calendarEvent = model.calendar[eventIndex];
+    for (let calendarEvent of eventsForWeek) {
         const {gridColumn, gridRowStart, gridRowEnd} = getEventPosition(calendarEvent);
         html += /* html */`
             <div 
@@ -58,12 +57,15 @@ function getEventHtml() {
 }
 
 function getEventPosition(calendarEvent) {
-    const startTime = new Date(calendarEvent.startTime);
+    const startTime = new Date(calendarEvent.date+"T"+calendarEvent.timeStart);
+    const endTime = new Date(calendarEvent.date+"T"+calendarEvent.timeEnd);
     const dayIndex = startTime.getDay();
-    const minutesFromMidnight = startTime.getHours() * 60 + startTime.getMinutes();
+    const startTimeInMinutes = startTime.getHours() * 60 + startTime.getMinutes();
+    const endTimeInMinutes = endTime.getHours() * 60 + endTime.getMinutes();
+    const durationInMinutes = endTimeInMinutes - startTimeInMinutes;
     let gridColumn;
-    let gridRowStart = 1 + Math.floor(minutesFromMidnight / 15);
-    let gridRowEnd = 1 + Math.ceil((minutesFromMidnight + calendarEvent.durationInMinutes) / 15);
+    let gridRowStart = 1 + Math.floor(startTimeInMinutes / 15);
+    let gridRowEnd = 1 + Math.ceil((startTimeInMinutes + durationInMinutes) / 15);
 
     if (dayIndex == 0) {
         gridColumn = 8;
@@ -76,14 +78,19 @@ function getEventPosition(calendarEvent) {
 
 function getPopupTaskDetailsHTML() {
     const currentTask = getTaskByID(model.inputs.popUps.taskDetails.taskId);
+    console.log(currentTask);
     return /* html */`
         <!-- <h1>Hello World! <br> lets do the harlem shake :D</h1> -->
         <h1>${currentTask.title}</h1>
         <div class="popup-grid">
             <h2>Tid: </h2>
-            <p>${new Date(currentTask.startTime).toLocaleString("nb-NO", {dateStyle: 'long',timeStyle: 'short'})}</p>
-            <h2>Varighet:</h2>
-            <p>${currentTask.durationInMinutes} minutter</p>
+            <p>
+                ${new Date(currentTask.date + "T" + currentTask.timeStart).toLocaleString("nb-NO", {dateStyle: 'long'})}
+                <br />
+                ${new Date(currentTask.date + "T" + currentTask.timeStart).toLocaleString("nb-NO", {timeStyle: 'short'})}
+                -
+                ${new Date(currentTask.date + "T" + currentTask.timeEnd).toLocaleString("nb-NO", {timeStyle: 'short'})}
+            </p>
             <h2 style="margin-top:0">Beskrivelse: </h2>
             <p style="margin-top: 0.2rem;">${currentTask.desc}</p>
         </div>
@@ -105,11 +112,11 @@ function getPopupEditTaskHTML() {
             <h2>Beskrivelse:</h2>
             <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${editTask.desc || ''}"></textarea>
             <h2>Dato:</h2>
-            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${editTask.date || ''}">
+            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${editTask.date || new Date().toISOString().substring(0, 10)}">
             <h2>Fra:</h2>
-            <input type="text" class="timeField" oninput="${path}.startTime = this.value" value="${editTask.startTime || ''}">
+            <input type="text" class="timeField" oninput="${path}.timeStart = this.value" value="${editTask.timeStart || ''}">
             <h2>Til:</h2>
-            <input type="text" class="timeField" oninput="${path}.endTime = this.value" value="${editTask.endTime || ''}">
+            <input type="text" class="timeField" oninput="${path}.timeEnd = this.value" value="${editTask.timeEnd || ''}">
             <h2>Gjenta:</h2>
             <div class="radio-buttons">
                 <span>
@@ -144,7 +151,7 @@ function getPopupEditTaskHTML() {
             <h2>Interval</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
-        <button onclick="">Legg til</button>
+        <button onclick="editTask()">Endre</button>
     `;
 }
 
@@ -159,11 +166,11 @@ function getPopupAddTaskHTML() {
             <h2>Beskrivelse:</h2>
             <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${addTask.desc || ''}"></textarea>
             <h2>Dato:</h2>
-            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${addTask.date || ''}">
+            <input type="text" class="dateField" oninput="${path}.date = this.value" value="${addTask.date || new Date().toISOString().substring(0, 10)}">
             <h2>Fra:</h2>
-            <input type="text" class="timeField" oninput="${path}.startTime = this.value" value="${addTask.startTime || ''}">
+            <input type="text" class="timeField" oninput="${path}.timeStart = this.value" value="${addTask.timeStart || ''}">
             <h2>Til:</h2>
-            <input type="text" class="timeField" oninput="${path}.endTime = this.value" value="${addTask.endTime || ''}">
+            <input type="text" class="timeField" oninput="${path}.timeEnd = this.value" value="${addTask.timeEnd || ''}">
             <h2>Gjenta:</h2>
             <div class="radio-buttons">
                 <span>
@@ -198,6 +205,6 @@ function getPopupAddTaskHTML() {
             <h2>Interval</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
-        <button onclick="">Legg til</button>
+        <button onclick="addTask()">Legg til</button>
     `;
 }

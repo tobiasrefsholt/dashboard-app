@@ -9,11 +9,12 @@ window.addEventListener("load", function () {
 function getEventsForWeek() {
     const returnEvents = [];
 
-    for (eventIndex in model.calendar) {
-        const eventWeek = new Date(model.calendar[eventIndex].startTime).getWeek();
+    for (let calendarEvent of model.calendar) {
+        const eventWeek = new Date(calendarEvent.date).getWeek();
         const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
+        console.log(eventWeek);
         if (eventWeek == displayWeek) {
-            returnEvents.push(model.calendar[eventIndex]);
+            returnEvents.push(calendarEvent);
         }
     }
     
@@ -27,7 +28,7 @@ function showEventDetails(taskId){
 }
 
 function getTaskByID(taskId) {
-    for (task of model.calendar) {
+    for (let task of model.calendar) {
         if (taskId == task.taskId) {
             return task;
         }
@@ -128,9 +129,67 @@ function showPopupAddTask() {
 }
 
 function addTask() {
+    const generate = generateTaskId();
+    let fields = model.inputs.popUps.addTask;
+    // TODO: Regn ut durationInMinutes
+    // TODO: Valider input-felter
+    // TODO: Feilmeldingsfunksjon
+    if (fields.date === null) fields.date = new Date().toISOString().substring(0, 10);
+    if(!validateFields(fields)) return;
+    model.calendar.push({
+        taskId: generate,
+        title: fields.title,
+        desc: fields.desc,
+        date: fields.date,
+        timeStart: fields.timeStart,
+        timeEnd: fields.timeEnd,
+        repeat: {
+            interval: fields.repeat.interval,
+            yearly: fields.repeat.yearly,
+            monthly: fields.repeat.monthly,
+            weekly: fields.repeat.weekly,
+            daily: fields.repeat.daily,
+        }
+    });
+    resetCalenderEventFields(fields);
+    model.app.currentPopUp = null;
+    updateView();
+}
+
+function validateFields(fields) {
+    return true;   
+}
+
+function resetCalenderEventFields(fields) {
+    fields = {
+        taskId: null,
+        title: null,
+        desc: null,
+        date: null,
+        timeStart: null,
+        timeEnd: null,
+        repeat: {
+            interval: null,
+            yearly: false,
+            monthly: false,
+            weekly: false,
+            daily: false,
+        }
+    }
+}
+
+function editTask(){
     
 }
 
 function deleteTask(taskId) {
     
+}
+
+function generateTaskId() {
+    const ids = [];
+    for (let calendarEvent of model.calendar) {
+        ids.push(calendarEvent.taskId);
+    }
+    return Math.max(...ids) + 1;
 }
