@@ -57,7 +57,7 @@ function getEventHtml() {
                 onclick="showEventDetails(${calendarEvent.taskId})"
                 class="calendar-event"
                 style="grid-column: ${gridColumn}; grid-row: ${gridRowStart} / ${gridRowEnd};">
-                ${calendarEvent.title}
+                <span>${calendarEvent.title}</span>
             </div>
         `;
     }

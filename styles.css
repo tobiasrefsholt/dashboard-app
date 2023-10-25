@@ -59,9 +59,16 @@ body{
 .calendar .calender-grid .calendar-event {
     background-color: #027CB7;
     color: #ffffff;
-    padding: .5rem;
+    /* padding: .5rem; */
     border-radius: .5rem;
     cursor: pointer;
+}
+
+.calendar .calender-grid .calendar-event span {
+    display: inline-block;
+    background-color: #027CB7;
+    padding: .5rem;
+    border-radius: .5rem;
 }
 
 .calendar .calender-grid .calendar-time {
