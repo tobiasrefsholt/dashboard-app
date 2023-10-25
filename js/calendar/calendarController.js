@@ -40,6 +40,13 @@ Date.prototype.getWeek = function() {
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
 }
 
+// Returns the four-digit year corresponding to the ISO week of the date.
+Date.prototype.getWeekYear = function() {
+    var date = new Date(this.getTime());
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    return date.getFullYear();
+}
+
 function clearTimer() {
     const fullTimer = model.inputs.mainPage.timer.fullTimer
     fullTimer.hours = null;
@@ -161,4 +168,19 @@ function generateTaskId() {
         ids.push(calendarEvent.taskId);
     }
     return Math.max(...ids) + 1;
+}
+
+function changeWeek(offset) {
+    const calendar = model.inputs.mainPage.calendar;
+    let targetWeek = calendar.showWeekNr + offset;
+    if (targetWeek > 52) {
+        calendar.showWeekNr = 1;
+        calendar.weekYear++;
+    } else if (targetWeek <= 0) {
+        calendar.showWeekNr = 52;
+        calendar.weekYear--;
+    } else {
+        calendar.showWeekNr = targetWeek;
+    }
+    updateView();
 }

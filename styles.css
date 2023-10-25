@@ -144,7 +144,7 @@ body{
 }
 
 .widget-header {
-    margin-top: 0;
+    margin: 0;
     text-align: center;
 }
 
@@ -245,4 +245,15 @@ button {
     flex-wrap: wrap;
     margin-top: .25rem;
     gap: .25rem;
+}
+
+.week-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.week-header h2{
+    margin: 0;
 }

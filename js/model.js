@@ -16,6 +16,7 @@ const model = {
             },
             calendar: {
                 showWeekNr: null,
+                weekYear: null,
             },
             weather: {
                 location: null,

@@ -1,8 +1,14 @@
 "use strict";
 
 function getCalendarHTML() {
+    const showWeekNumber = model.inputs.mainPage.calendar.showWeekNr;
+    const showWeekYear = model.inputs.mainPage.calendar.weekYear;
     return /* html */`
-        <h2 class="widget-header">Uke ${model.inputs.mainPage.calendar.showWeekNr}</h2>
+        <div class="week-header">
+            <button onclick="changeWeek(-1)"><</button>
+            <h2 class="widget-header">Uke ${showWeekNumber}, ${showWeekYear}</h2>
+            <button onclick="changeWeek(1)">></button>
+        </div>
         ${getCalendarHeaderHTML()}
         <div class="calender-grid">
             ${getCalendarTimeHTML()}
