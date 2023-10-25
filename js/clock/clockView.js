@@ -1,3 +1,5 @@
+"use strict";
+
 function getClockHTML() {
     return /* html */ `
         <h1 class="widget-header">Her kommer klokka</h1>

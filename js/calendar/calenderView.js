@@ -1,3 +1,5 @@
+"use strict";
+
 function getCalendarHTML() {
     return /* html */`
         <h2 class="widget-header">Uke ${model.inputs.mainPage.calendar.showWeekNr}</h2>
@@ -25,18 +27,18 @@ function getCalendarHeaderHTML() {
 }
 
 function getCalendarTimeHTML() {
-    $html = '';
+    let html = '';
     for (let i = 0; i < 24; i++) {
         let time = '';
         if (i<10) {
             time += '0';
         }
         time += i;
-        $html += /* html */ `
+        html += /* html */ `
             <span class="calendar-time">${time}:00</span>
         `;
     }
-    return $html;
+    return html;
 }
 
 function getEventHtml() {
