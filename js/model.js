@@ -194,7 +194,7 @@ const model = {
         },
     ],
     weather: [
-        {
+        /* {
             text: null,
             symbol: "",
             wind: {
@@ -202,43 +202,7 @@ const model = {
                 direction: "",
             },
             temp: 0,
-        },
-        {
-            text: "1 time",
-            symbol: "",
-            wind: {
-                speed: "",
-                direction: "",
-            },
-            temp: 0,
-        },
-        {
-            text: "3 timer",
-            symbol: "",
-            wind: {
-                speed: "",
-                direction: "",
-            },
-            temp: 0,
-        },
-        {
-            text: "6 timer",
-            symbol: "",
-            wind: {
-                speed: "",
-                direction: "",
-            },
-            temp: 0,
-        },
-        {
-            text: "12 timer",
-            symbol: "",
-            wind: {
-                speed: "",
-                direction: "",
-            },
-            temp: 0,
-        },
+        }, */
     ],
     alarms: [
         {
