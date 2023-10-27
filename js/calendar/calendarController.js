@@ -67,7 +67,7 @@ function clearPopup(){
 
 function showPopupEditTask(taskId) {
     model.app.currentPopUp = "editTask";
-    model.inputs.popUps.editTask.taskId = taskId;
+    model.inputs.popUps.editTask = JSON.parse(JSON.stringify(getTaskByID(taskId)));
     updateView();
 }
 
@@ -79,9 +79,6 @@ function showPopupAddTask() {
 function addTask() {
     const generate = generateTaskId();
     let fields = model.inputs.popUps.addTask;
-    // TODO: Regn ut durationInMinutes
-    // TODO: Valider input-felter
-    // TODO: Feilmeldingsfunksjon
     if (fields.date === null) fields.date = new Date().toISOString().substring(0, 10);
     if (!validateFields(fields)) {
         fields.errorMessage = "Fyll ut alle påkrevde felter.";
@@ -132,27 +129,30 @@ function resetCalenderEventFields(fields) {
     fields.repeat.daily = false;
 }
 
-function editTask(){
-    let fields = model.inputs.popUps.addTask;
-    // TODO: Regn ut durationInMinutes
-    // TODO: Valider input-felter
-    // TODO: Feilmeldingsfunksjon
-    if(!validateFields(fields)) return;
-    model.calendar.push({
-        taskId: fields.taskId,
-        title: fields.title,
-        desc: fields.desc,
-        date: fields.date,
-        timeStart: fields.timeStart,
-        timeEnd: fields.timeEnd,
-        repeat: {
-            interval: fields.repeat.interval,
-            yearly: fields.repeat.yearly,
-            monthly: fields.repeat.monthly,
-            weekly: fields.repeat.weekly,
-            daily: fields.repeat.daily,
-        }
-    });
+function editTask() {
+    let fields = model.inputs.popUps.editTask;
+    let targetTask = getTaskByID(fields.taskId);
+
+    if (fields.date === null) fields.date = new Date().toISOString().substring(0, 10);
+    if (!validateFields(fields)) {
+        fields.errorMessage = "Fyll ut alle påkrevde felter.";
+        updateView();
+        return;
+    } else {
+        fields.errorMessage = null;
+    }
+
+    targetTask.taskId = fields.taskId;
+    targetTask.title = fields.title;
+    targetTask.desc = fields.desc;
+    targetTask.date = fields.date;
+    targetTask.timeStart = fields.timeStart;
+    targetTask.timeEnd = fields.timeEnd;
+    targetTask.repeat.interval = fields.repeat.interval;
+    targetTask.repeat.yearly = fields.repeat.yearly;
+    targetTask.repeat.monthly = fields.repeat.monthly;
+    targetTask.repeat.weekly = fields.repeat.weekly;
+    targetTask.repeat.daily = fields.repeat.daily;
     resetCalenderEventFields(fields);
     model.app.currentPopUp = null;
     updateView();

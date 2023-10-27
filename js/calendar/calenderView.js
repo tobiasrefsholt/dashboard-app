@@ -118,7 +118,7 @@ function getPopupEditTaskHTML() {
             <h2>*Tittel:</h2>
             <input type="text" oninput="${path}.title = this.value" value="${editTask.title || ''}">
             <h2>Beskrivelse:</h2>
-            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${editTask.desc || ''}"></textarea>
+            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value">${editTask.desc || ''}</textarea>
             <h2>*Dato:</h2>
             <input type="text" class="dateField" oninput="${path}.date = this.value" value="${editTask.date || new Date().toISOString().substring(0, 10)}">
             <h2>*Fra:</h2>
@@ -159,7 +159,7 @@ function getPopupEditTaskHTML() {
             <h2>Interval</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
-        <p>${addTask.errorMessage || ''}</p>
+        <p>${editTask.errorMessage || ''}</p>
         <button onclick="editTask()">Endre</button>
     `;
 }
@@ -173,7 +173,7 @@ function getPopupAddTaskHTML() {
             <h2>*Tittel:</h2>
             <input type="text" oninput="${path}.title = this.value" value="${addTask.title || ''}">
             <h2>Beskrivelse:</h2>
-            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value" value="${addTask.desc || ''}"></textarea>
+            <textarea name="" id="" rows="5" oninput="${path}.desc = this.value">${addTask.desc || ''}</textarea>
             <h2>*Dato:</h2>
             <input type="text" class="dateField" oninput="${path}.date = this.value" value="${addTask.date || new Date().toISOString().substring(0, 10)}">
             <h2>*Fra:</h2>
