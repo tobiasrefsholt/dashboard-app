@@ -5,8 +5,10 @@ function getEventsForWeek() {
 
     for (let calendarEvent of model.calendar) {
         const eventWeek = new Date(calendarEvent.date).getWeek();
+        const eventYear = new Date(calendarEvent.date).getWeekYear();
         const displayWeek = model.inputs.mainPage.calendar.showWeekNr;
-        if (eventWeek == displayWeek) {
+        const displayYear = model.inputs.mainPage.calendar.weekYear;
+        if (eventWeek == displayWeek && eventYear == displayYear) {
             returnEvents.push(calendarEvent);
         }
     }
@@ -159,7 +161,11 @@ function editTask() {
 }
 
 function deleteTask(taskId) {
-    
+    const index = model.calendar.findIndex(x => x.taskId === taskId);
+    resetCalenderEventFields(model.inputs.popUps.editTask);
+    model.app.currentPopUp = null;
+    model.calendar.splice(index, 1);
+    updateView();
 }
 
 function generateTaskId() {

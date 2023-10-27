@@ -177,7 +177,7 @@ const model = {
             taskId: 7,
             title: "Mate unga 3 Electric beegalee",
             desc: "Må vel få no de også da",
-            date: "2023-12-14",
+            date: "2024-10-27",
             timeStart: "08:00",
             timeEnd: "10:00",
             repeat: {
