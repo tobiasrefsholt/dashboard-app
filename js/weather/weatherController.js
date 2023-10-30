@@ -13,7 +13,7 @@ function setCurrentLocation() {
     }
 
     function error() {
-        weather.error = "Unable to retrieve your location";
+        weather.error = "Unable to retrieve your location. Enable location permissions and reload.";
         weather.location.lat = null;
         weather.location.lon = null;
         updateView();
@@ -22,7 +22,9 @@ function setCurrentLocation() {
     if (!navigator.geolocation) {
         weather.error = "Geolocation is not supported by your browser";
     } else {
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error, {
+            enableHighAccuracy: true,
+        });
     }
 
 }

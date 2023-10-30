@@ -2,6 +2,12 @@
 
 function getWeatherHTML() {
     let html = ''
+    if (model.inputs.mainPage.weather.error !== null) {
+        return /* html */ `
+            <p>${model.inputs.mainPage.weather.error}</p>
+            <button onclick="setCurrentLocation()">Reload</button>
+        `;
+    }
     for (let time of model.weather.forecastPerHour) {
         html += /* html */ `
             <div class="weather-row">

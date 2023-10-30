@@ -91,7 +91,7 @@ const model = {
             taskId: 1,
             title: "Lufte hunden",
             desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id magna quis tellus ultrices ultrices at nec sem. Phasellus sed pulvinar lectus. Donec sollicitudin libero erat, nec suscipit lacus porta sed. Phasellus purus tellus, fermentum sit amet aliquet at, feugiat id enim.",
-            date: "2023-10-23",
+            date: "2023-10-30",
             timeStart: "09:00",
             timeEnd: "10:00",
             repeat: {
@@ -106,7 +106,7 @@ const model = {
             taskId: 2,
             title: "Lufte hunder",
             desc: "Jo flere hunder jo bedre",
-            date: "2023-10-24",
+            date: "2023-10-31",
             timeStart: "10:00",
             timeEnd: "11:30",
             repeat: {
@@ -121,7 +121,7 @@ const model = {
             taskId: 3,
             title: "Lufte katter",
             desc: "Katten trenger en tur ut den og sjø",
-            date: "2023-10-25",
+            date: "2023-11-01",
             timeStart: "05:00",
             timeEnd: "09:00",
             repeat: {
@@ -136,7 +136,7 @@ const model = {
             taskId: 4,
             title: "Vanne hunden",
             desc: "Våt bikkje = god lukt?",
-            date: "2023-10-26",
+            date: "2023-11-02",
             timeStart: "18:00",
             timeEnd: "19:00",
             repeat: {
@@ -151,7 +151,7 @@ const model = {
             taskId: 5,
             title: "Mate unga",
             desc: "Må vel få no de også da",
-            date: "2023-10-29",
+            date: "2023-11-05",
             timeStart: "08:00",
             timeEnd: "08:15",
             repeat: {
