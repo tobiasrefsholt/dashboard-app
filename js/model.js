@@ -194,7 +194,7 @@ const model = {
         },
     ],
     weather: {
-        precipitationToday: null,
+        precipitationToday: 0,
         forecastPerHour: [
             /* {
             text: null,
@@ -301,5 +301,33 @@ const model = {
         heavysleet: '48',
         lightsnow: '49',
         heavysnow: '50',
-      },
+    },
+    timeZones: {
+        // "-660": "Pacific/Midway",
+        "-660": "Pacific/Pago_Pago",
+        "-600": "Pacific/Honolulu",
+        "-540": "America/Anchorage",
+        "-480": "America/Los_Angeles",
+        "-420": "America/Denver",
+        "-360": "America/Mexico_City",
+        "-300": "America/New_York",
+        "-240": "America/Caracas",
+        "-180": "America/Argentina/Buenos_Aires",
+        "-120": "Atlantic/Stanley",
+        "-60" : "Atlantic/Azores",
+        "0"   : "Europe/London",
+        "60"  : "Europe/Berlin",
+        "120": "Europe/Athens",
+        "180": "Europe/Moscow",
+        "240": "Asia/Dubai",
+        "300": "Asia/Karachi",
+        "330": "Asia/Kolkata",
+        "360": "Asia/Almaty",
+        "420": "Asia/Bangkok",
+        "480": "Asia/Shanghai",
+        "540": "Asia/Tokyo",
+        "600": "Australia/Sydney",
+        "660": "Pacific/Honiara",
+        "720": "Pacific/Fiji"
+    }
 }

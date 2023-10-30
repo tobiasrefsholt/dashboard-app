@@ -1,11 +1,30 @@
 "use strict";
 
 function getClockHTML() {
-    return /* html */ `
-        <h1 class="widget-header">Her kommer klokka</h1>
-        <h4 class="widget-header">Tidssone: CEST</h4>
+
+    return /* html */ ` 
+        <h1 onclick="showClockPopup()" style="cursor:pointer" id="clock" class="widget-header">${getTime()}</h1>
     `;
 }
+
+function getTime() {
+    let options = {
+        timeZone: model.timeZones[model.inputs.popUps.clock.timeZone * (-1)],
+        timeZoneName: "short",
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+    },
+
+    formatter = new Intl.DateTimeFormat([], options);
+
+    return formatter.format(new Date());
+}
+
+setInterval(function () {
+    document.getElementById("clock").innerText = getTime();
+}, 100);
 
 function getAlarmHTML(){
     return /* html */ `
@@ -59,5 +78,33 @@ function getPopupAddAlarmHTML() {
 }
 
 function getPopupClockOptionsHTML() {
+    const clock = model.inputs.popUps.clock;
+    return /* html */ `
+        <h1>Klokkeinnstillinger</h1>
+        <div class="popup-grid">
+            <h2>12-timers klokke</h2>
+            <div>
+                <input type="checkbox" name="" id="" ${clock.in12hFormat ? `checked="true"` : ''}>
+            </div>
+            <h2>Vis sekunder</h2>
+            <div>
+                <input type="checkbox" name="" id="" ${clock.showSeconds ? `checked="true"` : ''}>
+            </div>
+            <h2>Tidssone</h2>
+            <select onchange="model.inputs.popUps.clock.timeZone = this.value">
+                ${getTimesoneHTML()}
+            </select>
+        </div>
+    `;
+}
 
+function getTimesoneHTML() {
+    let html = ``;
+    for (let key in model.timeZones) {
+        const gmt = key/60 >= 0 ? "GMT+" + key/60 : "GMT" + key/60;
+        html+= /* html */ `
+            <option ${(key * (-1)) == model.inputs.popUps.clock.timeZone ? "selected" : ''} value="${key * (-1)}">${model.timeZones[key]} (${gmt})</option>
+        `;
+    }
+    return html;
 }

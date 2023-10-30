@@ -214,7 +214,7 @@ body{
 .popup-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: minmax(min-content, 30%) 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .popup-grid h2, .popup p {

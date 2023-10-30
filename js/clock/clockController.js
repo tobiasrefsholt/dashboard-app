@@ -49,3 +49,8 @@ function timer() {
     }
     updateTimerView();
 }
+
+function showClockPopup() {
+    model.app.currentPopUp = "clockOptions";
+    updateView();
+}
