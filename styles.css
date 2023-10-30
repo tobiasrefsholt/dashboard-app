@@ -264,3 +264,17 @@ button {
 .week-header h2{
     margin: 0;
 }
+
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.weather-row .weather-time {
+    min-width: 4rem;
+    font-weight: bold;
+    color: white;
+}

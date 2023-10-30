@@ -20,8 +20,8 @@ const model = {
             },
             weather: {
                 location: {
-                    lat: 59.0771988,
-                    lon: 10.0570956,
+                    lat: null,
+                    lon: null,
                 },
                 error: null,
                 tempType: 'celcius',
@@ -193,8 +193,10 @@ const model = {
             },
         },
     ],
-    weather: [
-        /* {
+    weather: {
+        precipitationToday: null,
+        forecastPerHour: [
+            /* {
             text: null,
             symbol: "",
             wind: {
@@ -203,7 +205,8 @@ const model = {
             },
             temp: 0,
         }, */
-    ],
+        ],
+    },
     alarms: [
         {
             alarmId: 1,
