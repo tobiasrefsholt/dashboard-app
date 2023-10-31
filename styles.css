@@ -235,6 +235,12 @@ body{
     resize: vertical;
 }
 
+.popup-grid input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0;
+}
+
 button {
     background-color: #027CB7;
     color: white;

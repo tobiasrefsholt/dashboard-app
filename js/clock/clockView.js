@@ -4,20 +4,22 @@ function getClockHTML() {
 
     return /* html */ ` 
         <h1 onclick="showClockPopup()" style="cursor:pointer" id="clock" class="widget-header">${getTime()}</h1>
+        <h3 onclick="showClockPopup()" style="cursor:pointer">${model.timeZones[model.inputs.popUps.clock.timeZone * (-1)].short}</h3>
     `;
 }
 
 function getTime() {
+    const clock = model.inputs.popUps.clock;
     let options = {
-        timeZone: model.timeZones[model.inputs.popUps.clock.timeZone * (-1)],
-        timeZoneName: "short",
+        timeZone: model.timeZones[clock.timeZone * (-1)].long,
         hour: '2-digit',
         minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-    },
+        hour12: clock.in12hFormat,
+    };
 
-    formatter = new Intl.DateTimeFormat([], options);
+    if (clock.showSeconds) options.second = '2-digit';
+
+    const formatter = new Intl.DateTimeFormat([], options);
 
     return formatter.format(new Date());
 }
@@ -84,14 +86,21 @@ function getPopupClockOptionsHTML() {
         <div class="popup-grid">
             <h2>12-timers klokke</h2>
             <div>
-                <input type="checkbox" name="" id="" ${clock.in12hFormat ? `checked="true"` : ''}>
+                <input
+                    type="checkbox" name="" id=""
+                    ${clock.in12hFormat ? `checked="true"` : ''}
+                    onchange="model.inputs.popUps.clock.in12hFormat = !model.inputs.popUps.clock.in12hFormat"
+                >
             </div>
             <h2>Vis sekunder</h2>
             <div>
-                <input type="checkbox" name="" id="" ${clock.showSeconds ? `checked="true"` : ''}>
+                <input type="checkbox" name="" id=""
+                    ${clock.showSeconds ? `checked="true"` : ''}
+                    onchange="model.inputs.popUps.clock.showSeconds = !model.inputs.popUps.clock.showSeconds"
+                >
             </div>
             <h2>Tidssone</h2>
-            <select onchange="model.inputs.popUps.clock.timeZone = this.value">
+            <select onchange="model.inputs.popUps.clock.timeZone = this.value;updateView()">
                 ${getTimesoneHTML()}
             </select>
         </div>
@@ -103,7 +112,12 @@ function getTimesoneHTML() {
     for (let key in model.timeZones) {
         const gmt = key/60 >= 0 ? "GMT+" + key/60 : "GMT" + key/60;
         html+= /* html */ `
-            <option ${(key * (-1)) == model.inputs.popUps.clock.timeZone ? "selected" : ''} value="${key * (-1)}">${model.timeZones[key]} (${gmt})</option>
+            <option
+                ${(key * (-1)) == model.inputs.popUps.clock.timeZone ? "selected" : ''}
+                value="${key * (-1)}"
+                >
+                ${model.timeZones[key].long} (${gmt})
+            </option>
         `;
     }
     return html;

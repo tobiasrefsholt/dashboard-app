@@ -79,7 +79,7 @@ const model = {
                 notif: null,
             },
             clock: {
-                showSeconds: false,
+                showSeconds: true,
                 in12hFormat: false,
                 timeZone: null,
             },
@@ -303,31 +303,106 @@ const model = {
         heavysnow: '50',
     },
     timeZones: {
-        // "-660": "Pacific/Midway",
-        "-660": "Pacific/Pago_Pago",
-        "-600": "Pacific/Honolulu",
-        "-540": "America/Anchorage",
-        "-480": "America/Los_Angeles",
-        "-420": "America/Denver",
-        "-360": "America/Mexico_City",
-        "-300": "America/New_York",
-        "-240": "America/Caracas",
-        "-180": "America/Argentina/Buenos_Aires",
-        "-120": "Atlantic/Stanley",
-        "-60" : "Atlantic/Azores",
-        "0"   : "Europe/London",
-        "60"  : "Europe/Berlin",
-        "120": "Europe/Athens",
-        "180": "Europe/Moscow",
-        "240": "Asia/Dubai",
-        "300": "Asia/Karachi",
-        "330": "Asia/Kolkata",
-        "360": "Asia/Almaty",
-        "420": "Asia/Bangkok",
-        "480": "Asia/Shanghai",
-        "540": "Asia/Tokyo",
-        "600": "Australia/Sydney",
-        "660": "Pacific/Honiara",
-        "720": "Pacific/Fiji"
-    }
+        "-720": {
+          "short": "NZST",
+          "long": "Antarctica/South_Pole"
+        },
+        "-660": {
+          "short": "SST",
+          "long": "Pacific/Pago_Pago"
+        },
+        "-600": {
+          "short": "TAHT",
+          "long": "Pacific/Honolulu"
+        },
+        "-540": {
+          "short": "HST",
+          "long": "America/Anchorage"
+        },
+        "-480": {
+          "short": "PST",
+          "long": "America/Los_Angeles"
+        },
+        "-420": {
+          "short": "MST",
+          "long": "America/Denver"
+        },
+        "-360": {
+          "short": "CST",
+          "long": "America/Mexico_City"
+        },
+        "-300": {
+          "short": "EST",
+          "long": "America/New_York"
+        },
+        "-240": {
+          "short": "VET",
+          "long": "America/Caracas"
+        },
+        "-180": {
+          "short": "ART",
+          "long": "America/Argentina/Buenos_Aires"
+        },
+        "-120": {
+          "short": "GST",
+          "long": "Atlantic/Stanley"
+        },
+        "-60": {
+          "short": "CVT",
+          "long": "Atlantic/Azores"
+        },
+        "0": {
+          "short": "GMT",
+          "long": "Europe/London"
+        },
+        "60": {
+          "short": "CET",
+          "long": "Europe/Berlin"
+        },
+        "120": {
+          "short": "CEST",
+          "long": "Europe/Athens"
+        },
+        "180": {
+          "short": "MSK",
+          "long": "Europe/Moscow"
+        },
+        "240": {
+          "short": "GST",
+          "long": "Asia/Dubai"
+        },
+        "300": {
+          "short": "PKT",
+          "long": "Asia/Karachi"
+        },
+        "360": {
+          "short": "ALMT",
+          "long": "Asia/Almaty"
+        },
+        "420": {
+          "short": "ICT",
+          "long": "Asia/Bangkok"
+        },
+        "480": {
+          "short": "CST",
+          "long": "Asia/Shanghai"
+        },
+        "540": {
+          "short": "JST",
+          "long": "Asia/Tokyo"
+        },
+        "600": {
+          "short": "AEST",
+          "long": "Australia/Sydney"
+        },
+        "660": {
+          "short": "HST",
+          "long": "Pacific/Honiara"
+        },
+        "720": {
+            "short": "GMT+12",
+            "long": "Pacific/Fiji"
+          }
+      }
+      
 }
