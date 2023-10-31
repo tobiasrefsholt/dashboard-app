@@ -2,7 +2,7 @@
 
 const model = {
     app: {
-        currentPopUp: null,
+        currentPopUp: "alarmList",
     },
     inputs: {
         mainPage: {
@@ -68,15 +68,31 @@ const model = {
                 alarmId: null,
                 title: null,
                 time: null,
-                repeat: false,
-                notif: null,
+                isActive: null,
+                repeat: [
+                    false, // Mandag
+                    false, // Tirsdag
+                    false, // Onsdag
+                    false, // Torsdag
+                    false, // Fredag
+                    false, // Lørdag
+                    false, // Søndag
+                ],
             },
             addAlarm: {
                 alarmId: null,
                 title: null,
                 time: null,
-                repeat: false,
-                notif: null,
+                isActive: null,
+                repeat: [
+                    false, // Mandag
+                    false, // Tirsdag
+                    false, // Onsdag
+                    false, // Torsdag
+                    false, // Fredag
+                    false, // Lørdag
+                    false, // Søndag
+                ],
             },
             clock: {
                 showSeconds: true,
@@ -211,10 +227,47 @@ const model = {
         {
             alarmId: 1,
             title: 'Lorem',
-            time: null,
-            duration: null,
-            repeat: false,
-            notif: null,
+            time: "18:00",
+            repeat: [
+                false, // Mandag
+                true, // Tirsdag
+                true, // Onsdag
+                false, // Torsdag
+                false, // Fredag
+                true, // Lørdag
+                true, // Søndag
+            ],
+            isActive: true,
+        },
+        {
+            alarmId: 2,
+            title: 'Ipsum',
+            time: "18:00",
+            repeat: [
+                false, 
+                false, 
+                true, 
+                false, 
+                false, 
+                false, 
+                false,
+            ],
+            isActive: true,
+        },
+        {
+            alarmId: 3,
+            title: 'Dolor',
+            time: "18:00",
+            repeat: [
+                false,
+                false, 
+                false, 
+                false,
+                false, 
+                false,
+                false, 
+            ],
+            isActive: false,
         },/* ... */
     ],
     weatherSymbolKeys: {
@@ -403,6 +456,6 @@ const model = {
             "short": "GMT+12",
             "long": "Pacific/Fiji"
           }
-      }
-      
+    },
+    weekdays: ["man", "tirs", "ons", "tors", "fre", "lør", "søn"],
 }

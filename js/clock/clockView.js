@@ -31,6 +31,7 @@ setInterval(function () {
 function getAlarmHTML(){
     return /* html */ `
         <h2 class="widget-header">Neste alarm om:</h2>
+        <button onclick="showAlarmListPopup()">Håndter alarmer</button>
     `;
 }
 
@@ -69,6 +70,35 @@ function updateTimerView() {
     document.getElementById("hours").value = fields.hours || '';
     document.getElementById("minutes").value = fields.minutes || '';
     document.getElementById("seconds").value = fields.seconds || '';
+}
+
+function getPopupAlarmListHTML() {
+    let html = '';
+    for (let alarm of model.alarms) {
+        html += /* html */ `
+        <div class="alarm-row" onclick="">
+            <h1>${alarm.time}</h1>
+            ${getRepeatDaysHTML(alarm.repeat)}
+            <h2>${alarm.title}</h2>
+        </div>
+        `;
+    }
+    return /* html */ `
+        <h1>Hello World!</h1>
+        ${html}
+    `;
+}
+
+function getRepeatDaysHTML(repeat) {
+    let html = '';
+    for (let index = 0; index < repeat.length; index++) {
+        if (repeat[index]) {
+            html += /* html */ `
+                <span>${model.weekdays[index]}<span>
+            `;
+        }
+    }
+    return /* html */ `<div class="alarm-repeat">${html}</div>`
 }
 
 function getPopupEditAlarmHTML() {

@@ -54,3 +54,8 @@ function showClockPopup() {
     model.app.currentPopUp = "clockOptions";
     updateView();
 }
+
+function showAlarmListPopup() {
+    model.app.currentPopUp = "alarmList";
+    updateView();
+}

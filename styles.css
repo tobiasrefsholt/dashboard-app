@@ -279,8 +279,33 @@ button {
     margin-bottom: 1rem;
 }
 
-.weather-row .weather-time {
+.weather-row span {
     min-width: 4rem;
     font-weight: bold;
     color: white;
+}
+
+.weather-row img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.alarm-row {
+    border: solid 1px #ffffff20;
+    border-radius: .5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.alarm-row h1, .alarm-row h2 {
+    margin: 0;
+}
+
+.alarm-row .alarm-repeat {
+    flex-grow: 1;
 }

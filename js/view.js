@@ -32,6 +32,9 @@ function getPopupHTML() {
     if (currentPopUp == "addTask") {
         popupHTML = getPopupAddTaskHTML();
     }
+    if (currentPopUp == "alarmList") {
+        popupHTML = getPopupAlarmListHTML();
+    }
     if (currentPopUp == "editAlarm") {
         popupHTML = getPopupEditAlarmHTML();
     }
