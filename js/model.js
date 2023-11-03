@@ -2,7 +2,7 @@
 
 const model = {
     app: {
-        currentPopUp: "alarmList",
+        currentPopUp: null,
     },
     inputs: {
         mainPage: {
