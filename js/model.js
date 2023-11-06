@@ -2,7 +2,7 @@
 
 const model = {
     app: {
-        currentPopUp: "addAlarm",
+        currentPopUp: null,
     },
     inputs: {
         mainPage: {
@@ -227,24 +227,25 @@ const model = {
         {
             alarmId: 1,
             title: 'Lorem',
-            time: "18:00",
+            time: "14:50",
             repeat: [
-                false, // Mandag
+                true, // Mandag
                 true, // Tirsdag
                 true, // Onsdag
-                false, // Torsdag
-                false, // Fredag
+                true, // Torsdag
+                true, // Fredag
                 true, // Lørdag
                 true, // Søndag
             ],
             isActive: true,
+            lastRing: '2023-11-05',
         },
         {
             alarmId: 2,
             title: 'Ipsum',
-            time: "18:00",
+            time: "14:13",
             repeat: [
-                false, 
+                true, 
                 false, 
                 true, 
                 false, 
@@ -253,11 +254,12 @@ const model = {
                 false,
             ],
             isActive: true,
+            lastRing: '2023-11-06',
         },
         {
             alarmId: 3,
             title: 'Dolor',
-            time: "18:00",
+            time: "13:00",
             repeat: [
                 false,
                 false, 
@@ -267,7 +269,8 @@ const model = {
                 false,
                 false, 
             ],
-            isActive: false,
+            isActive: true,
+            lastRing: '2023-11-06',
         },/* ... */
     ],
     weatherSymbolKeys: {

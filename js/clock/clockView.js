@@ -79,7 +79,7 @@ function getPopupAlarmListHTML() {
         <div class="alarm-row" onclick="">
             <h1>${alarm.time}</h1>
             ${getRepeatDaysHTML(alarm.repeat)}
-            <h2>${alarm.title}</h2>
+            <h2>${alarm.title || ''}</h2>
         </div>
         `;
     }
@@ -112,17 +112,18 @@ function getPopupAddAlarmHTML() {
         <div class="popup-grid">
             <h2>Navn:</h2>
             <div>
-                <input type="text" oninput="model.inputs.popUps.addAlarm.title = this.value">
+                <input type="text" oninput="model.inputs.popUps.addAlarm.title = this.value" value="${model.inputs.popUps.addAlarm.title || ''}">
             </div>
-            <h2>Tid:</h2>
+            <h2>*Tid:</h2>
             <div>
-                <input class="timeField" type="text" oninput="model.inputs.popUps.addAlarm.time = this.value">
+                <input class="timeField" type="text" oninput="model.inputs.popUps.addAlarm.time = this.value" value="${model.inputs.popUps.addAlarm.time || ''}">
             </div>
             <h2>Gjenta:</h2>
             <div class="alarm-repeat">
                 ${getAlarmRepeatHTML()}
             </div>
         </div>
+        <p>${model.inputs.popUps.addAlarm.errorMessage || ''}</p>
         <button onclick="addAlarm()">Legg til</button>
     `;
 }

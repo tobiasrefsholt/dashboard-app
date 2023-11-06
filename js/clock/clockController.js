@@ -51,7 +51,37 @@ function timer() {
 }
 
 function addAlarm() {
-    
+    const fields = model.inputs.popUps.addAlarm;
+    if (!fields.time) {
+        fields.errorMessage = "Tidspunkt ikke valgt.";
+        updateView();
+        return false;
+    }
+    fields.id = generateAlarmId();
+    fields.isActive = true;
+    model.alarms.push(JSON.parse(JSON.stringify(fields)));
+    resetAlarmFields(fields);
+    model.app.currentPopUp = "alarmList";
+    updateView();
+}
+
+function generateAlarmId() {
+    const ids = [];
+    for (let alarm of model.alarms) {
+        ids.push(alarm.taskId);
+    }
+    return Math.max(...ids) + 1;
+}
+
+function resetAlarmFields(fields) {
+    fields.alarmId = null
+    fields.title = null;
+    fields.time = null;
+    fields.isActive = null;
+    fields.errorMessage = null;
+    for (let index in fields.repeat) {
+        fields.repeat[index] = false;
+    }
 }
 
 function toggleWeekdayInAlarm(index) {
@@ -72,4 +102,63 @@ function showAlarmListPopup() {
 function showAddAlarmPopup() {
     model.app.currentPopUp = "addAlarm";
     updateView();
+}
+
+function getAlarmDate(time) {
+    return new Date([new Date().toISOString().substring(0,10), time]).getTime();
+}
+
+const alarmInterval = setInterval(function () {
+    const timeNow = new Date();
+    let currentDay = timeNow.getDay();
+    if (currentDay == 0) {
+        currentDay = 6;
+    } else {
+        currentDay -= 1;
+    }
+    for (let alarm of model.alarms) {
+        const repeating = isRepeating(alarm);
+        
+        // Skip alarm if skipAlarm() returns true
+        if (skipAlarm(alarm, repeating, timeNow)) continue;
+
+        if (alarm.repeat[currentDay]) {
+            alert("Repeating alarm: " + alarm.title);
+            alarm.lastRing = timeNow.toISOString().substring(0,10);
+        } else if (!repeating) {
+            alert("Alarm:" + alarm.title);
+            alarm.isActive = false;
+        }
+    }
+}, 5000)
+
+function isRepeating(alarm) {
+    for (let day of alarm.repeat) {
+        if (day) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function skipAlarm(alarm, repeating, timeNow) {
+    // Check if alarm is active
+    if (!alarm.isActive) return true;
+
+    // Check if alarm time has passed
+    if (getAlarmDate(alarm.time) >= timeNow.getTime()) return true;
+
+    // Check if alarm was triggered today
+    if (new Date(alarm.lastRing).getDate() == timeNow.getDate()) return true;
+
+    const milliSecondsToAlarm = getAlarmDate(alarm.time) - timeNow.getTime();
+    console.log(milliSecondsToAlarm);
+    
+    // Check if alarm should have triggered within the last 10 minutes
+    if (milliSecondsToAlarm < -10 * 60 * 1000) { // minutes * seconds * milliseconds
+        if (!repeating) alarm.isActive = false;
+        return true;
+    }
+
+    return false;
 }
