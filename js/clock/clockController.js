@@ -50,12 +50,26 @@ function timer() {
     updateTimerView();
 }
 
-function showClockPopup() {
+function addAlarm() {
+    
+}
+
+function toggleWeekdayInAlarm(index) {
+    model.inputs.popUps.addAlarm.repeat[index] = !model.inputs.popUps.addAlarm.repeat[index];
+    updateView();
+}
+
+function showClockOptionsPopup() {
     model.app.currentPopUp = "clockOptions";
     updateView();
 }
 
 function showAlarmListPopup() {
     model.app.currentPopUp = "alarmList";
+    updateView();
+}
+
+function showAddAlarmPopup() {
+    model.app.currentPopUp = "addAlarm";
     updateView();
 }

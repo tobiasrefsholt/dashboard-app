@@ -156,7 +156,7 @@ function getPopupEditTaskHTML() {
                     <label for="repeat-yearly">Årlig</label>
                 </span>
             </div>
-            <h2>Interval</h2>
+            <h2>Interval:</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
         <p>${editTask.errorMessage || ''}</p>
@@ -211,7 +211,7 @@ function getPopupAddTaskHTML() {
                     <label for="repeat-yearly">Årlig</label>
                 </span>
             </div>
-            <h2>Interval</h2>
+            <h2>Interval:</h2>
             <input type="number" value=1 min="1" oninput="${path}.repeat.interval = Math.abs(this.value)">
         </div>
         <p>${addTask.errorMessage || ''}</p>

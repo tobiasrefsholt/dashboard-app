@@ -3,8 +3,8 @@
 function getClockHTML() {
 
     return /* html */ ` 
-        <h1 onclick="showClockPopup()" style="cursor:pointer" id="clock" class="widget-header">${getTime()}</h1>
-        <h3 onclick="showClockPopup()" style="cursor:pointer">${model.timeZones[model.inputs.popUps.clock.timeZone * (-1)].short}</h3>
+        <h1 onclick="showClockOptionsPopup()" style="cursor:pointer" id="clock" class="widget-header">${getTime()}</h1>
+        <h3 onclick="showClockOptionsPopup()" style="cursor:pointer">${model.timeZones[model.inputs.popUps.clock.timeZone * (-1)].short}</h3>
     `;
 }
 
@@ -84,8 +84,9 @@ function getPopupAlarmListHTML() {
         `;
     }
     return /* html */ `
-        <h1>Hello World!</h1>
+        <h1>Aktive alarmer</h1>
         ${html}
+        <button onclick="showAddAlarmPopup()">Ny alarm</button>
     `;
 }
 
@@ -106,7 +107,38 @@ function getPopupEditAlarmHTML() {
 }
 
 function getPopupAddAlarmHTML() {
+    return /* html */ `
+        <h1>Legg til alarm</h1>
+        <div class="popup-grid">
+            <h2>Navn:</h2>
+            <div>
+                <input type="text" oninput="model.inputs.popUps.addAlarm.title = this.value">
+            </div>
+            <h2>Tid:</h2>
+            <div>
+                <input class="timeField" type="text" oninput="model.inputs.popUps.addAlarm.time = this.value">
+            </div>
+            <h2>Gjenta:</h2>
+            <div class="alarm-repeat">
+                ${getAlarmRepeatHTML()}
+            </div>
+        </div>
+        <button onclick="addAlarm()">Legg til</button>
+    `;
+}
 
+function getAlarmRepeatHTML() {
+    let html = '';
+    for (const index in model.weekdays) {
+        const day = model.weekdays[index];
+        const repeat = model.inputs.popUps.addAlarm.repeat[index];
+        html += /* html*/ `
+            <div ${repeat ? `class="checked"`: ''} onclick="toggleWeekdayInAlarm(${index})">
+                ${day}
+            </div>
+        `;
+    }
+    return html;
 }
 
 function getPopupClockOptionsHTML() {
@@ -114,7 +146,7 @@ function getPopupClockOptionsHTML() {
     return /* html */ `
         <h1>Klokkeinnstillinger</h1>
         <div class="popup-grid">
-            <h2>12-timers klokke</h2>
+            <h2>12-timers klokke:</h2>
             <div>
                 <input
                     type="checkbox" name="" id=""
@@ -122,14 +154,14 @@ function getPopupClockOptionsHTML() {
                     onchange="model.inputs.popUps.clock.in12hFormat = !model.inputs.popUps.clock.in12hFormat"
                 >
             </div>
-            <h2>Vis sekunder</h2>
+            <h2>Vis sekunder:</h2>
             <div>
                 <input type="checkbox" name="" id=""
                     ${clock.showSeconds ? `checked="true"` : ''}
                     onchange="model.inputs.popUps.clock.showSeconds = !model.inputs.popUps.clock.showSeconds"
                 >
             </div>
-            <h2>Tidssone</h2>
+            <h2>Tidssone:</h2>
             <select onchange="model.inputs.popUps.clock.timeZone = this.value;updateView()">
                 ${getTimesoneHTML()}
             </select>
