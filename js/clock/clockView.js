@@ -24,10 +24,6 @@ function getTime() {
     return formatter.format(new Date());
 }
 
-setInterval(function () {
-    document.getElementById("clock").innerText = getTime();
-}, 100);
-
 function getAlarmHTML() {
     const nextAlarm = getNextActiveAlarm();
     return /* html */ `
@@ -40,7 +36,7 @@ function getAlarmHTML() {
 
 function getTimerHTML() {
     const timerModel = model.inputs.mainPage.timer;
-    const PlayOrPauseSVG = (timerInterval == null)
+    const PlayOrPauseSVG = (timerModel.timerInterval == null)
         ? `<svg onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 408.221 408.221" xml:space="preserve"><g><circle cx="204.1105" cy="204.1105" r="150" fill="white" /><g><path d="M204.11,0C91.388,0,0,91.388,0,204.111c0,112.725,91.388,204.11,204.11,204.11c112.729,0,204.11-91.385,204.11-204.11    C408.221,91.388,316.839,0,204.11,0z M286.547,229.971l-126.368,72.471c-17.003,9.75-30.781,1.763-30.781-17.834V140.012    c0-19.602,13.777-27.575,30.781-17.827l126.368,72.466C303.551,204.403,303.551,220.217,286.547,229.971z"/></g></g></svg>`
         : `<svg onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" style="enable-background:new 0 0 100 100;" xml:space="preserve" viewBox="11 11 78 78"><circle cx="50" cy="50" r="35" fill="white" /><g><path d="M50,11c-21.5,0-39,17.5-39,39s17.5,39,39,39s39-17.5,39-39S71.5,11,50,11z M45,63c0,1.7-1.3,3-3,3   s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z M61,63c0,1.7-1.3,3-3,3s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z"></path></g></svg>`
     ;

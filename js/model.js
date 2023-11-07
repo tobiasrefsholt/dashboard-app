@@ -16,6 +16,7 @@ const model = {
                     seconds: null
                 },
                 countDownDate: null,
+                timerInterval: null,
             },
             calendar: {
                 showWeekNr: null,
@@ -265,7 +266,7 @@ const model = {
         {
             alarmId: 3,
             title: 'Dolor',
-            time: "21:00",
+            time: "23:00",
             repeat: [
                 false,
                 false, 

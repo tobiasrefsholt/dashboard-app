@@ -1,15 +1,15 @@
 "use strict";
 
-let timerInterval = null;
-
 function toggleTimer() {
-    if (timerInterval == null) {
+    const mainPageTimer = model.inputs.mainPage.timer;
+    if (mainPageTimer.timerInterval == null) {
         setCountdownDate();
-        timerInterval = setInterval(timer, 100);
+        mainPageTimer.timerInterval = setInterval(timer, 100);
     } else {
-        clearInterval(timerInterval);
-        timerInterval = null;
+        clearInterval(mainPageTimer.timerInterval);
+        mainPageTimer.timerInterval = null;
     }
+    saveModelToLocalStorage();
     updateView();
 }
 
@@ -20,6 +20,7 @@ function setCountdownDate() {
         modelTimer.fullTimer.hours * 3600
         + modelTimer.fullTimer.minutes * 60 + modelTimer.fullTimer.seconds;
     modelTimer.countDownDate = new Date(dateNow + seconds * 1000).getTime();
+    saveModelToLocalStorage();
 }
 
 // Update the count down every 1 second
@@ -43,11 +44,25 @@ function timer() {
 
     // If the count down is finished, write some text
     if (distance < 100) {
-        clearInterval(timerInterval);
+        clearInterval(model.inputs.mainPage.timer.timerInterval);
         playAlarm(null);
         clearTimer();
     }
     updateTimerView();
+}
+
+function clearTimer() {
+    const fullTimer = model.inputs.mainPage.timer.fullTimer
+    fullTimer.hours = null;
+    fullTimer.minutes = null;
+    fullTimer.seconds = null;
+    document.getElementById("hours").value = null;
+    document.getElementById("minutes").value = null;
+    document.getElementById("seconds").value = null;
+    clearInterval(model.inputs.mainPage.timer.timerInterval);
+    model.inputs.mainPage.timer.timerInterval = null;
+    saveModelToLocalStorage();
+    updateView();
 }
 
 function addAlarm() {
@@ -62,6 +77,7 @@ function addAlarm() {
     model.alarms.push(JSON.parse(JSON.stringify(fields)));
     resetAlarmFields(fields);
     model.app.currentPopUp = "alarmList";
+    saveModelToLocalStorage();
     updateView();
 }
 
@@ -164,6 +180,7 @@ function skipAlarm(alarm, repeating, timeNow) {
 function deleteAlarm(alarmId) {
     const index = model.alarms.findIndex(x => x.alarmId === alarmId);
     model.alarms.splice(index, 1);
+    saveModelToLocalStorage();
     updateView();
 }
 

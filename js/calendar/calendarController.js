@@ -49,19 +49,6 @@ Date.prototype.getWeekYear = function() {
     return date.getFullYear();
 }
 
-function clearTimer() {
-    const fullTimer = model.inputs.mainPage.timer.fullTimer
-    fullTimer.hours = null;
-    fullTimer.minutes = null;
-    fullTimer.seconds = null;
-    document.getElementById("hours").value = null;
-    document.getElementById("minutes").value = null;
-    document.getElementById("seconds").value = null;
-    clearInterval(timerInterval);
-    timerInterval = null;
-    updateView();
-}
-
 function clearPopup(){
     model.app.currentPopUp = null;
     updateView();
@@ -106,6 +93,7 @@ function addTask() {
     });
     resetCalenderEventFields(fields);
     model.app.currentPopUp = null;
+    saveModelToLocalStorage();
     updateView();
 }
 
@@ -157,6 +145,7 @@ function editTask() {
     targetTask.repeat.daily = fields.repeat.daily;
     resetCalenderEventFields(fields);
     model.app.currentPopUp = null;
+    saveModelToLocalStorage();
     updateView();
 }
 
@@ -165,6 +154,7 @@ function deleteTask(taskId) {
     resetCalenderEventFields(model.inputs.popUps.editTask);
     model.app.currentPopUp = null;
     model.calendar.splice(index, 1);
+    saveModelToLocalStorage();
     updateView();
 }
 
