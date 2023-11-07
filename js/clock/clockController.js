@@ -152,7 +152,6 @@ function skipAlarm(alarm, repeating, timeNow) {
     if (new Date(alarm.lastRing).getDate() == timeNow.getDate()) return true;
 
     const milliSecondsToAlarm = getAlarmDate(alarm.time) - timeNow.getTime();
-    console.log(milliSecondsToAlarm);
     
     // Check if alarm should have triggered within the last 10 minutes
     if (milliSecondsToAlarm < -10 * 60 * 1000) { // minutes * seconds * milliseconds
@@ -173,4 +172,21 @@ function toggleAlarmActive(alarmId) {
     const alarm = model.alarms.find(x => x.alarmId === alarmId);
     alarm.isActive = !alarm.isActive;
     updateView();
+}
+
+function getNextActiveAlarm() {
+    const nextAlarm = {
+        alarmId: null,
+        time: null,
+    };
+    for (let alarm of model.alarms) {
+        const time = getAlarmDate(alarm.time) - new Date().getTime();
+        if (time <= 0 || !alarm.isActive) continue;
+        if (nextAlarm.alarmId === null || (nextAlarm.time > time)) {
+            nextAlarm.alarmId = alarm.alarmId,
+            nextAlarm.time = time;
+        };
+    }
+    if (nextAlarm.id === null) return null;
+    return model.alarms.find(x => x.alarmId === nextAlarm.alarmId);
 }

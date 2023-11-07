@@ -29,8 +29,10 @@ setInterval(function () {
 }, 100);
 
 function getAlarmHTML(){
+    const nextAlarm = getNextActiveAlarm();
     return /* html */ `
-        <h2 class="widget-header">Neste alarm om:</h2>
+        <h2 class="widget-header">Neste alarm</h2>
+        ${nextAlarm !== null ? getAlarmRowHTML(nextAlarm) : ''}
         <button onclick="showAlarmListPopup()">Håndter alarmer</button>
     `;
 }

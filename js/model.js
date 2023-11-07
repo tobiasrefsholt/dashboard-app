@@ -243,7 +243,7 @@ const model = {
         {
             alarmId: 2,
             title: 'Ipsum',
-            time: "14:13",
+            time: "14:20",
             repeat: [
                 true, 
                 false, 
@@ -259,7 +259,7 @@ const model = {
         {
             alarmId: 3,
             title: 'Dolor',
-            time: "13:00",
+            time: "19:00",
             repeat: [
                 false,
                 false, 
