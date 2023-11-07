@@ -254,7 +254,6 @@ button {
 .radio-buttons span {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     flex-wrap: wrap;
     margin-top: .25rem;
     gap: .25rem;
@@ -312,6 +311,8 @@ button {
 
 .alarm-row .delete-button {
     cursor: pointer;
+    width: 2rem;
+    height: 2rem;
 }
 
 .alarm-repeat {
@@ -322,8 +323,6 @@ button {
 
 .alarm-repeat input[type="checkbox"] {
     display: none;
-    /* width: 1.5rem;
-    accent-color: transparent; */
 }
 
 .toggle-button {

@@ -57,7 +57,7 @@ function addAlarm() {
         updateView();
         return false;
     }
-    fields.id = generateAlarmId();
+    fields.alarmId= generateAlarmId();
     fields.isActive = true;
     model.alarms.push(JSON.parse(JSON.stringify(fields)));
     resetAlarmFields(fields);
@@ -155,7 +155,6 @@ function skipAlarm(alarm, repeating, timeNow) {
     
     // Check if alarm should have triggered within the last 10 minutes
     if (milliSecondsToAlarm < -10 * 60 * 1000) { // minutes * seconds * milliseconds
-        if (!repeating) alarm.isActive = false;
         return true;
     }
 
@@ -195,14 +194,14 @@ function playAlarm(alarmId) {
     model.app.currentPopUp = "activeAlarm";
     model.inputs.popUps.activeAlarm.alarmId = alarmId;
     const randomIndex = Math.floor(Math.random() * model.alarm.files.length)
-    audio = new Audio(model.alarm.files[randomIndex]);
-    audio.play();
+    model.alarm.audio = new Audio(model.alarm.files[randomIndex]);
+    model.alarm.audio.play();
     updateView();
 }
 
 function stopAlarm() {
     model.app.currentPopUp = null;
     model.inputs.popUps.activeAlarm.alarmId = null;
-    audio.pause();
+    model.alarm.audio.pause();
     updateView();
 }
