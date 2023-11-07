@@ -28,16 +28,16 @@ setInterval(function () {
     document.getElementById("clock").innerText = getTime();
 }, 100);
 
-function getAlarmHTML(){
+function getAlarmHTML() {
     const nextAlarm = getNextActiveAlarm();
     return /* html */ `
-        <h2 class="widget-header">Neste alarm</h2>
+        <h2 class="widget-header" style="margin-bottom: 1rem">Neste alarm</h2>
         ${nextAlarm !== null ? getAlarmRowHTML(nextAlarm) : ''}
         <button onclick="showAlarmListPopup()">Håndter alarmer</button>
     `;
 }
 
-function getTimerHTML(){
+function getTimerHTML() {
     const timerModel = model.inputs.mainPage.timer;
     const PlayOrPauseSVG = (timerInterval == null)
         ? `<svg onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 408.221 408.221" xml:space="preserve"><g><circle cx="204.1105" cy="204.1105" r="150" fill="white" /><g><path d="M204.11,0C91.388,0,0,91.388,0,204.111c0,112.725,91.388,204.11,204.11,204.11c112.729,0,204.11-91.385,204.11-204.11    C408.221,91.388,316.839,0,204.11,0z M286.547,229.971l-126.368,72.471c-17.003,9.75-30.781,1.763-30.781-17.834V140.012    c0-19.602,13.777-27.575,30.781-17.827l126.368,72.466C303.551,204.403,303.551,220.217,286.547,229.971z"/></g></g></svg>`
@@ -110,8 +110,14 @@ function getRepeatDaysHTML(repeat) {
     return /* html */ `<div class="alarm-repeat">${html}</div>`
 }
 
-function getPopupEditAlarmHTML() {
-
+function getActiveAlarmHTML() {
+    const alarm = model.alarms.find(x => (x.alarmId == model.inputs.popUps.activeAlarm.alarmId))
+    return /* html */ `
+        <h1>${alarm.title}</h1>
+        <h2>${alarm.time}</h2>
+        ${getRepeatDaysHTML(alarm.repeat)}
+        <button onclick="stopAlarm()">Slå av</button>
+    `
 }
 
 function getPopupAddAlarmHTML() {

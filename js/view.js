@@ -35,11 +35,11 @@ function getPopupHTML() {
     if (currentPopUp == "alarmList") {
         popupHTML = getPopupAlarmListHTML();
     }
-    if (currentPopUp == "editAlarm") {
-        popupHTML = getPopupEditAlarmHTML();
-    }
     if (currentPopUp == "addAlarm") {
         popupHTML = getPopupAddAlarmHTML();
+    }
+    if (currentPopUp == "activeAlarm") {
+        popupHTML = getActiveAlarmHTML();
     }
     if (currentPopUp == "clockOptions") {
         popupHTML = getPopupClockOptionsHTML();

@@ -94,6 +94,9 @@ const model = {
                     false, // Søndag
                 ],
             },
+            activeAlarm: {
+              alarmId: null,
+            },
             clock: {
                 showSeconds: true,
                 in12hFormat: false,
@@ -232,8 +235,8 @@ const model = {
                 true, // Mandag
                 true, // Tirsdag
                 true, // Onsdag
-                true, // Torsdag
-                true, // Fredag
+                false, // Torsdag
+                false, // Fredag
                 true, // Lørdag
                 true, // Søndag
             ],
@@ -243,7 +246,7 @@ const model = {
         {
             alarmId: 2,
             title: 'Ipsum',
-            time: "14:20",
+            time: "14:41",
             repeat: [
                 true, 
                 false, 
@@ -360,105 +363,111 @@ const model = {
     },
     timeZones: {
         "-720": {
-          "short": "NZST",
-          "long": "Antarctica/South_Pole"
+            "short": "NZST",
+            "long": "Antarctica/South_Pole"
         },
         "-660": {
-          "short": "SST",
-          "long": "Pacific/Pago_Pago"
+            "short": "SST",
+            "long": "Pacific/Pago_Pago"
         },
         "-600": {
-          "short": "TAHT",
-          "long": "Pacific/Honolulu"
+            "short": "TAHT",
+            "long": "Pacific/Honolulu"
         },
         "-540": {
-          "short": "HST",
-          "long": "America/Anchorage"
+            "short": "HST",
+            "long": "America/Anchorage"
         },
         "-480": {
-          "short": "PST",
-          "long": "America/Los_Angeles"
+            "short": "PST",
+            "long": "America/Los_Angeles"
         },
         "-420": {
-          "short": "MST",
-          "long": "America/Denver"
+            "short": "MST",
+            "long": "America/Denver"
         },
         "-360": {
-          "short": "CST",
-          "long": "America/Mexico_City"
+            "short": "CST",
+            "long": "America/Mexico_City"
         },
         "-300": {
-          "short": "EST",
-          "long": "America/New_York"
+            "short": "EST",
+            "long": "America/New_York"
         },
         "-240": {
-          "short": "VET",
-          "long": "America/Caracas"
+            "short": "VET",
+            "long": "America/Caracas"
         },
         "-180": {
-          "short": "ART",
-          "long": "America/Argentina/Buenos_Aires"
+            "short": "ART",
+            "long": "America/Argentina/Buenos_Aires"
         },
         "-120": {
-          "short": "GST",
-          "long": "Atlantic/Stanley"
+            "short": "GST",
+            "long": "Atlantic/Stanley"
         },
         "-60": {
-          "short": "CVT",
-          "long": "Atlantic/Azores"
+            "short": "CVT",
+            "long": "Atlantic/Azores"
         },
         "0": {
-          "short": "GMT",
-          "long": "Europe/London"
+            "short": "GMT",
+            "long": "Europe/London"
         },
         "60": {
-          "short": "CET",
-          "long": "Europe/Berlin"
+            "short": "CET",
+            "long": "Europe/Berlin"
         },
         "120": {
-          "short": "CEST",
-          "long": "Europe/Athens"
+            "short": "CEST",
+            "long": "Europe/Athens"
         },
         "180": {
-          "short": "MSK",
-          "long": "Europe/Moscow"
+            "short": "MSK",
+            "long": "Europe/Moscow"
         },
         "240": {
-          "short": "GST",
-          "long": "Asia/Dubai"
+            "short": "GST",
+            "long": "Asia/Dubai"
         },
         "300": {
-          "short": "PKT",
-          "long": "Asia/Karachi"
+            "short": "PKT",
+            "long": "Asia/Karachi"
         },
         "360": {
-          "short": "ALMT",
-          "long": "Asia/Almaty"
+            "short": "ALMT",
+            "long": "Asia/Almaty"
         },
         "420": {
-          "short": "ICT",
-          "long": "Asia/Bangkok"
+            "short": "ICT",
+            "long": "Asia/Bangkok"
         },
         "480": {
-          "short": "CST",
-          "long": "Asia/Shanghai"
+            "short": "CST",
+            "long": "Asia/Shanghai"
         },
         "540": {
-          "short": "JST",
-          "long": "Asia/Tokyo"
+            "short": "JST",
+            "long": "Asia/Tokyo"
         },
         "600": {
-          "short": "AEST",
-          "long": "Australia/Sydney"
+            "short": "AEST",
+            "long": "Australia/Sydney"
         },
         "660": {
-          "short": "HST",
-          "long": "Pacific/Honiara"
+            "short": "HST",
+            "long": "Pacific/Honiara"
         },
         "720": {
             "short": "GMT+12",
             "long": "Pacific/Fiji"
-          }
+        }
     },
     weekdays: ["man", "tirs", "ons", "tors", "fre", "lør", "søn"],
+    alarm: {
+        audio: null,
+        files: [
+            '/alarms/Norway_EAS_alarm.mp3',
+        ]
+    }
 }

@@ -123,10 +123,10 @@ const alarmInterval = setInterval(function () {
         if (skipAlarm(alarm, repeating, timeNow)) continue;
 
         if (alarm.repeat[currentDay]) {
-            alert("Repeating alarm: " + alarm.title);
+            playAlarm(alarm.alarmId);
             alarm.lastRing = timeNow.toISOString().substring(0,10);
         } else if (!repeating) {
-            alert("Alarm:" + alarm.title);
+            playAlarm(alarm.alarmId);
             alarm.isActive = false;
         }
     }
@@ -189,4 +189,22 @@ function getNextActiveAlarm() {
     }
     if (nextAlarm.alarmId === null) return null;
     return model.alarms.find(x => x.alarmId === nextAlarm.alarmId);
+}
+
+let audio;
+
+function playAlarm(alarmId) {
+    model.app.currentPopUp = "activeAlarm";
+    model.inputs.popUps.activeAlarm.alarmId = alarmId;
+    const randomIndex = Math.floor(Math.random() * model.alarm.files.length)
+    audio = new Audio(model.alarm.files[randomIndex]);
+    audio.play();
+    updateView();
+}
+
+function stopAlarm() {
+    model.app.currentPopUp = null;
+    model.inputs.popUps.activeAlarm.alarmId = null;
+    audio.pause();
+    updateView();
 }
