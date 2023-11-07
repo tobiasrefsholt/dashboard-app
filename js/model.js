@@ -6,6 +6,9 @@ const model = {
     },
     inputs: {
         mainPage: {
+            alarm: {
+                isMuted: false,
+            },
             timer: {
                 fullTimer: {
                     hours: null,

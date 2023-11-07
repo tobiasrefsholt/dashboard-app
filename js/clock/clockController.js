@@ -42,9 +42,9 @@ function timer() {
     fields.seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // If the count down is finished, write some text
-    if (distance < 1000) {
+    if (distance < 100) {
         clearInterval(timerInterval);
-        alert("Timer ferdig!");
+        playAlarm(null);
         clearTimer();
     }
     updateTimerView();
@@ -191,11 +191,13 @@ function getNextActiveAlarm() {
 }
 
 function playAlarm(alarmId) {
+    model.inputs.popUps.activeAlarm.alarmId = (alarmId !== null) ? alarmId : null;
     model.app.currentPopUp = "activeAlarm";
-    model.inputs.popUps.activeAlarm.alarmId = alarmId;
     const randomIndex = Math.floor(Math.random() * model.alarm.files.length);
     model.alarm.audio = new Audio(model.alarm.files[randomIndex]);
-    model.alarm.audio.play();
+    if (!model.inputs.mainPage.alarm.isMuted) {
+        model.alarm.audio.play();
+    }
     updateView();
 }
 
@@ -203,5 +205,11 @@ function stopAlarm() {
     model.app.currentPopUp = null;
     model.inputs.popUps.activeAlarm.alarmId = null;
     model.alarm.audio.pause();
+    updateView();
+}
+
+function toggleMuteAlarm() {
+    model.inputs.mainPage.alarm.isMuted = !model.inputs.mainPage.alarm.isMuted;
+    if (model.alarm.audio) model.alarm.audio.pause();
     updateView();
 }

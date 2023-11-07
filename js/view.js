@@ -9,9 +9,9 @@
             <div class="grid-item weather">${getWeatherHTML() || ''}</div>
             <div class="grid-item alarm">${getAlarmHTML() || ''}</div>
             <div class="grid-item timer">${getTimerHTML() || ''}</div>
-            <div class="buttons">
+            <!-- <div class="buttons">
                 <button onclick="showPopupAddTask()">Legg til oppgave</button>
-            </div>
+            </div> -->
         </div>
         ${popupHTML}
     `;

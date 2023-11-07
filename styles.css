@@ -12,13 +12,13 @@ body{
 .main-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: min-content 1fr repeat(3, min-content);
+    grid-template-rows: min-content 1fr repeat(2, min-content);
     grid-template-areas: 
         "clock    clock    clock    clock"
         "calendar calendar calendar weather"
         "calendar calendar calendar alarm"
         "calendar calendar calendar timer"
-        "buttons  buttons  buttons  buttons"
+        /* "buttons  buttons  buttons  buttons" */
     ;
     gap: 2rem;
     height: 100vh;
@@ -54,6 +54,12 @@ body{
 .calendar .calendar-header-row .calendar-header {
     grid-row: 1 / span 4;
     text-align: center;
+}
+
+.calendar-header svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
 }
 
 .calendar .calender-grid .calendar-event {
@@ -93,30 +99,19 @@ body{
 .timer svg {
     fill: #027CB7;
     cursor: pointer;
-    width: 3rem;
+    width: 2rem;
     height: auto;
    
 }
 
-/* .timer .play {
-    width: 3rem;
-    height: 3rem;
-}
-
-.timer .pause {
-    width: calc(3rem - 7px);
-    height: calc(3rem - 7px);
-} */
-
 .timer .buttons {
     display: flex;
     align-items: center;
-    /* flex-direction: column; */
     gap: .5rem;
 }
 
 .timer .timerNumbers {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .timer .timerNumbers input {
@@ -311,8 +306,8 @@ button {
 
 .alarm-row .delete-button {
     cursor: pointer;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .alarm-repeat {
