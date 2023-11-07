@@ -48,6 +48,7 @@ function timer() {
         playAlarm(null);
         clearTimer();
     }
+    localStorage.setItem("timer", JSON.stringify(model.inputs.mainPage.timer));
     updateTimerView();
 }
 

@@ -7,6 +7,7 @@ window.addEventListener("load", async function () {
     setCurrentLocation();
     loadModelFromLocalStorage();
     updateView();
+    initTimerFromLocalStorage();
     setInterval(function () {
         document.getElementById("clock").innerText = getTime();
     }, 100);
@@ -27,4 +28,16 @@ function loadModelFromLocalStorage() {
 
     const timerJSON = localStorage.getItem("timer");
     if(timerJSON) model.inputs.mainPage.timer = JSON.parse(timerJSON);
+}
+
+function initTimerFromLocalStorage() {
+    const timerModel = model.inputs.mainPage.timer;
+    console.log(timerModel.timerInterval);
+    if (timerModel.countDownDate > new Date().getTime()) {
+        if(timerModel.timerInterval) {
+            timerModel.timerInterval = null;
+            setCountdownDate();
+            toggleTimer();
+        }
+    }
 }
