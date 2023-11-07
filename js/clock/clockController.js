@@ -193,7 +193,7 @@ function getNextActiveAlarm() {
 function playAlarm(alarmId) {
     model.app.currentPopUp = "activeAlarm";
     model.inputs.popUps.activeAlarm.alarmId = alarmId;
-    const randomIndex = Math.floor(Math.random() * model.alarm.files.length)
+    const randomIndex = Math.floor(Math.random() * model.alarm.files.length);
     model.alarm.audio = new Audio(model.alarm.files[randomIndex]);
     model.alarm.audio.play();
     updateView();

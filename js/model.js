@@ -262,7 +262,7 @@ const model = {
         {
             alarmId: 3,
             title: 'Dolor',
-            time: "19:00",
+            time: "21:00",
             repeat: [
                 false,
                 false, 
@@ -467,7 +467,10 @@ const model = {
     alarm: {
         audio: null,
         files: [
-            '/alarms/Norway_EAS_alarm.mp3',
+            'alarms/Air Raid Siren_ Alert.mp3',
+            'alarms/Klaxon Alarm Sound.mp3',
+            'alarms/Norway_EAS_alarm.mp3',
+            'alarms/Tornado Siren.mp3'
         ]
     }
 }
