@@ -162,3 +162,15 @@ function skipAlarm(alarm, repeating, timeNow) {
 
     return false;
 }
+
+function deleteAlarm(alarmId) {
+    const index = model.alarms.findIndex(x => x.alarmId === alarmId);
+    model.alarms.splice(index, 1);
+    updateView();
+}
+
+function toggleAlarmActive(alarmId) {
+    const alarm = model.alarms.find(x => x.alarmId === alarmId);
+    alarm.isActive = !alarm.isActive;
+    updateView();
+}

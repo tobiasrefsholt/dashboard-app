@@ -75,18 +75,24 @@ function updateTimerView() {
 function getPopupAlarmListHTML() {
     let html = '';
     for (let alarm of model.alarms) {
-        html += /* html */ `
-        <div class="alarm-row" onclick="">
-            <h1>${alarm.time}</h1>
-            ${getRepeatDaysHTML(alarm.repeat)}
-            <h2>${alarm.title || ''}</h2>
-        </div>
-        `;
+        html += getAlarmRowHTML(alarm);
     }
     return /* html */ `
         <h1>Aktive alarmer</h1>
         ${html}
         <button onclick="showAddAlarmPopup()">Ny alarm</button>
+    `;
+}
+
+function getAlarmRowHTML(alarm) {
+    return /* html */ `
+        <div class="alarm-row" onclick="">
+            <div class="toggle-button${alarm.isActive ? " checked" : ''}" onclick="toggleAlarmActive(${alarm.alarmId})"></div>
+            <h1>${alarm.time}</h1>
+            ${getRepeatDaysHTML(alarm.repeat)}
+            <h2>${alarm.title || ''}</h2>
+            <span class="delete-button" onclick="deleteAlarm(${alarm.alarmId})">X</span>
+        </div>
     `;
 }
 
@@ -134,7 +140,7 @@ function getAlarmRepeatHTML() {
         const day = model.weekdays[index];
         const repeat = model.inputs.popUps.addAlarm.repeat[index];
         html += /* html*/ `
-            <div ${repeat ? `class="checked"`: ''} onclick="toggleWeekdayInAlarm(${index})">
+            <div class="toggle-button${repeat ? " checked": ''}" onclick="toggleWeekdayInAlarm(${index})">
                 ${day}
             </div>
         `;

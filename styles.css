@@ -310,6 +310,10 @@ button {
     flex-grow: 1;
 }
 
+.alarm-row .delete-button {
+    cursor: pointer;
+}
+
 .alarm-repeat {
     display: flex;
     align-items: center;
@@ -322,7 +326,7 @@ button {
     accent-color: transparent; */
 }
 
-.alarm-repeat div {
+.toggle-button {
     cursor: pointer;
     color: white;
     padding: .5rem;
@@ -331,6 +335,6 @@ button {
     user-select: none;
 }
 
-.alarm-repeat div.checked {
+.toggle-button.checked {
     background-color: #027CB7;
 }
