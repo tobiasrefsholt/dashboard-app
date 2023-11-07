@@ -187,6 +187,6 @@ function getNextActiveAlarm() {
             nextAlarm.time = time;
         };
     }
-    if (nextAlarm.id === null) return null;
+    if (nextAlarm.alarmId === null) return null;
     return model.alarms.find(x => x.alarmId === nextAlarm.alarmId);
 }
