@@ -68,7 +68,7 @@ function addAlarm() {
 function generateAlarmId() {
     const ids = [];
     for (let alarm of model.alarms) {
-        ids.push(alarm.taskId);
+        ids.push(alarm.alarmId);
     }
     return Math.max(...ids) + 1;
 }
@@ -190,8 +190,6 @@ function getNextActiveAlarm() {
     if (nextAlarm.alarmId === null) return null;
     return model.alarms.find(x => x.alarmId === nextAlarm.alarmId);
 }
-
-let audio;
 
 function playAlarm(alarmId) {
     model.app.currentPopUp = "activeAlarm";
