@@ -26,7 +26,7 @@ function getWeatherHTML() {
         `;
     }
     return /* html */`
-        <h2 class="widget-header"></h2>
+        <h2 style="text-align:center;">Været for i dag</h2> 
         ${html}
         <div style="text-align: center;">Nedbør neste 24 timer: ${model.weather.precipitationToday.toFixed(1)} mm</div>
     `;
