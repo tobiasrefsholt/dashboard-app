@@ -142,9 +142,11 @@ const alarmInterval = setInterval(function () {
         if (alarm.repeat[currentDay]) {
             playAlarm(alarm.alarmId);
             alarm.lastRing = timeNow.toISOString().substring(0,10);
+            saveModelToLocalStorage();
         } else if (!repeating) {
             playAlarm(alarm.alarmId);
             alarm.isActive = false;
+            saveModelToLocalStorage();
         }
     }
 }, 5000)
