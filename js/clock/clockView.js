@@ -26,19 +26,25 @@ function getTime() {
 
 function getAlarmHTML() {
     const nextAlarm = getNextActiveAlarm();
+    const muteSVG = (model.inputs.mainPage.alarm.isMuted)
+        ? `<svg style="background-color: #027CB7; padding:.5rem;border-radius:50%;" onclick="toggleMuteAlarm()" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="800px" height="800px" viewBox="0 0 512 512"><path d="M448,464a15.92,15.92,0,0,1-11.31-4.69l-384-384A16,16,0,0,1,75.31,52.69l384,384A16,16,0,0,1,448,464Z"/><path d="M440.08,341.31c-1.66-2-3.29-4-4.89-5.93-22-26.61-35.31-42.67-35.31-118,0-39-9.33-71-27.72-95-13.56-17.73-31.89-31.18-56.05-41.12a3,3,0,0,1-.82-.67C306.6,51.49,282.82,32,256,32s-50.59,19.49-59.28,48.56a3.13,3.13,0,0,1-.81.65,157.88,157.88,0,0,0-21.88,11,8,8,0,0,0-1.49,12.49L434.32,366.44a8,8,0,0,0,13.6-6.63A35.39,35.39,0,0,0,440.08,341.31Z"/><path d="M112.14,217.35c0,75.36-13.29,91.42-35.31,118-1.6,1.93-3.23,3.89-4.89,5.93a35.16,35.16,0,0,0-4.65,37.62c6.17,13,19.32,21.07,34.33,21.07H312.8a8,8,0,0,0,5.66-13.66l-192-192a8,8,0,0,0-13.62,5Q112.14,208,112.14,217.35Z"/><path d="M256,480a80.06,80.06,0,0,0,70.44-42.13A4,4,0,0,0,322.9,432H189.12a4,4,0,0,0-3.55,5.87A80.06,80.06,0,0,0,256,480Z"/></svg>`
+        : `<svg style="background-color: #027CB7; padding:.5rem;border-radius:50%;" onclick="toggleMuteAlarm()" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="800px" height="800px" viewBox="0 0 512 512"><path d="M440.08,341.31c-1.66-2-3.29-4-4.89-5.93-22-26.61-35.31-42.67-35.31-118,0-39-9.33-71-27.72-95-13.56-17.73-31.89-31.18-56.05-41.12a3,3,0,0,1-.82-.67C306.6,51.49,282.82,32,256,32s-50.59,19.49-59.28,48.56a3.13,3.13,0,0,1-.81.65c-56.38,23.21-83.78,67.74-83.78,136.14,0,75.36-13.29,91.42-35.31,118-1.6,1.93-3.23,3.89-4.89,5.93a35.16,35.16,0,0,0-4.65,37.62c6.17,13,19.32,21.07,34.33,21.07H410.5c14.94,0,28-8.06,34.19-21A35.17,35.17,0,0,0,440.08,341.31Z"/><path d="M256,480a80.06,80.06,0,0,0,70.44-42.13,4,4,0,0,0-3.54-5.87H189.12a4,4,0,0,0-3.55,5.87A80.06,80.06,0,0,0,256,480Z"/></svg>`
+    ;
     return /* html */ `
         <h2 class="widget-header" style="margin-bottom: 1rem">Neste alarm</h2>
         ${nextAlarm !== null ? getAlarmRowHTML(nextAlarm) : ''}
-        <button onclick="showAlarmListPopup()">Håndter alarmer</button>
-        <button onclick="toggleMuteAlarm()">Mute</button>
+        <div style="display: flex; justify-content: space-between;">
+            <button onclick="showAlarmListPopup()">Håndter alarmer</button>
+            ${muteSVG}
+        </div>
     `;
 }
 
 function getTimerHTML() {
     const timerModel = model.inputs.mainPage.timer;
     const PlayOrPauseSVG = (timerModel.timerInterval == null)
-        ? `<svg onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 408.221 408.221" xml:space="preserve"><g><circle cx="204.1105" cy="204.1105" r="150" fill="white" /><g><path d="M204.11,0C91.388,0,0,91.388,0,204.111c0,112.725,91.388,204.11,204.11,204.11c112.729,0,204.11-91.385,204.11-204.11    C408.221,91.388,316.839,0,204.11,0z M286.547,229.971l-126.368,72.471c-17.003,9.75-30.781,1.763-30.781-17.834V140.012    c0-19.602,13.777-27.575,30.781-17.827l126.368,72.466C303.551,204.403,303.551,220.217,286.547,229.971z"/></g></g></svg>`
-        : `<svg onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" style="enable-background:new 0 0 100 100;" xml:space="preserve" viewBox="11 11 78 78"><circle cx="50" cy="50" r="35" fill="white" /><g><path d="M50,11c-21.5,0-39,17.5-39,39s17.5,39,39,39s39-17.5,39-39S71.5,11,50,11z M45,63c0,1.7-1.3,3-3,3   s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z M61,63c0,1.7-1.3,3-3,3s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z"></path></g></svg>`
+        ? `<svg fill="#027CB7" onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 408.221 408.221" xml:space="preserve"><g><circle cx="204.1105" cy="204.1105" r="150" fill="white" /><g><path d="M204.11,0C91.388,0,0,91.388,0,204.111c0,112.725,91.388,204.11,204.11,204.11c112.729,0,204.11-91.385,204.11-204.11    C408.221,91.388,316.839,0,204.11,0z M286.547,229.971l-126.368,72.471c-17.003,9.75-30.781,1.763-30.781-17.834V140.012    c0-19.602,13.777-27.575,30.781-17.827l126.368,72.466C303.551,204.403,303.551,220.217,286.547,229.971z"/></g></g></svg>`
+        : `<svg fill="#027CB7" onclick="toggleTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" style="enable-background:new 0 0 100 100;" xml:space="preserve" viewBox="11 11 78 78"><circle cx="50" cy="50" r="35" fill="white" /><g><path d="M50,11c-21.5,0-39,17.5-39,39s17.5,39,39,39s39-17.5,39-39S71.5,11,50,11z M45,63c0,1.7-1.3,3-3,3   s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z M61,63c0,1.7-1.3,3-3,3s-3-1.3-3-3V37c0-1.7,1.3-3,3-3s3,1.3,3,3V63z"></path></g></svg>`
     ;
     return /* html */ `
         <div class="timerNumbers">
@@ -59,7 +65,7 @@ function getTimerHTML() {
         </div>
         <div class="buttons">
             ${PlayOrPauseSVG}
-            <svg onclick="clearTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" style="enable-background:new 0 0 512 512;" xml:space="preserve" viewBox="22 22 468 468"><g><circle cx="256" cy="256" r="230" fill="white"></circle><path d="M421.463,90.537C377.266,46.34,318.503,22,256,22C128.462,22,22,128.462,22,256c0,127.538,106.462,234,234,234   s234-106.462,234-234C490,193.496,465.66,134.734,421.463,90.537z M360.133,330.434l-27.374-56.394l25.132-12.199l13.481,27.774   l0.652-2.696c2.456-10.151,3.702-20.554,3.702-30.919c0-71.271-57.152-129.255-127.401-129.255S120.924,184.729,120.924,256   c0,70.936,56.61,128.709,126.405,129.251v27.936C162.136,412.639,92.989,342.337,92.989,256   c0-86.675,69.684-157.191,155.337-157.191S403.662,169.325,403.662,256c0,11.46-1.254,22.974-3.727,34.223l-0.489,2.226   l23.22-13.622l14.136,24.095l-57.035,33.46C371.25,343.5,360.75,335.75,360.133,330.434z"></path></g></svg>
+            <svg fill="#027CB7" onclick="clearTimer()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" style="enable-background:new 0 0 512 512;" xml:space="preserve" viewBox="22 22 468 468"><g><circle cx="256" cy="256" r="230" fill="white"></circle><path d="M421.463,90.537C377.266,46.34,318.503,22,256,22C128.462,22,22,128.462,22,256c0,127.538,106.462,234,234,234   s234-106.462,234-234C490,193.496,465.66,134.734,421.463,90.537z M360.133,330.434l-27.374-56.394l25.132-12.199l13.481,27.774   l0.652-2.696c2.456-10.151,3.702-20.554,3.702-30.919c0-71.271-57.152-129.255-127.401-129.255S120.924,184.729,120.924,256   c0,70.936,56.61,128.709,126.405,129.251v27.936C162.136,412.639,92.989,342.337,92.989,256   c0-86.675,69.684-157.191,155.337-157.191S403.662,169.325,403.662,256c0,11.46-1.254,22.974-3.727,34.223l-0.489,2.226   l23.22-13.622l14.136,24.095l-57.035,33.46C371.25,343.5,360.75,335.75,360.133,330.434z"></path></g></svg>
         </div>
     `;
 }

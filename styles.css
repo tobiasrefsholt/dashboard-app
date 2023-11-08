@@ -96,12 +96,10 @@ body{
     justify-content: space-between;
 }
 
-.timer svg {
-    fill: #027CB7;
+.timer svg, .alarm svg {
     cursor: pointer;
     width: 2rem;
     height: auto;
-   
 }
 
 .timer .buttons {
