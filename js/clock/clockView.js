@@ -50,17 +50,17 @@ function getTimerHTML() {
         <div class="timerNumbers">
             <input type="number" id="hours" placeholder="00" 
                 value="${timerModel.fullTimer.hours || ''}"
-                oninput="model.inputs.mainPage.timer.fullTimer.hours = this.value"
+                oninput="model.inputs.mainPage.timer.fullTimer.hours = this.valueAsNumber"
             />
             <span>:</span>
             <input type="number" id="minutes" placeholder="00"
                 value="${timerModel.fullTimer.minutes || ''}"
-                oninput="model.inputs.mainPage.timer.fullTimer.minutes = this.value"
+                oninput="model.inputs.mainPage.timer.fullTimer.minutes = this.valueAsNumber"
             />
             <span>:</span>
             <input type="number" id="seconds" placeholder="00"
                 value="${timerModel.fullTimer.seconds || ''}"
-                oninput="model.inputs.mainPage.timer.fullTimer.seconds = this.value"
+                oninput="model.inputs.mainPage.timer.fullTimer.seconds = this.valueAsNumber"
             />
         </div>
         <div class="buttons">
